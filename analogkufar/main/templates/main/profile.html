@@ -25,14 +25,21 @@
 </div>
 <div class="spisokadsprofile">
   <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
-  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
-  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
-  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
-  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
-  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
-  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
-  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
-  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
+  <div class="myads">
+    <a href="{% url 'inbox' %}" class="button">
+        Мои сообщения
+        {% if messages.count %}
+            ({{ messages.count }})
+        {% endif %}
+    </a>
+</div>
+<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
+<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
+<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
+<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
+<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
+<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
+<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
 <!--  <div class="myads"><button class="button" onclick="location.href='{% url 'logout' %}?next=/'">Выйти</button></div>-->
 
 </div>
