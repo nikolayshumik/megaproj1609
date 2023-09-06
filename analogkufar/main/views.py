@@ -177,7 +177,7 @@ def basket(request):
 
         ad = Ad.objects.get(id=ad_id)
 
-        basket_item, created = BasketItem.objects.get_or_create(basket=user_basket, ad=ad)
+        basket_item, created = BasketItem.objects.update_or_create(basket=user_basket, ad=ad, defaults={'quantity': 0})
         basket_item.quantity += quantity
         basket_item.save()
 
@@ -186,8 +186,14 @@ def basket(request):
         basket_items = BasketItem.objects.filter(basket=user_basket)
         ads = Ad.objects.filter(basketitem__in=basket_items)
 
-        return render(request, 'main/basket.html', {'ads': ads})
+        total_quantity = 0
+        total_price = 0
 
+        for item in basket_items:
+            total_quantity += item.quantity
+            total_price += item.ad.price * item.quantity
+
+        return render(request, 'main/basket.html', {'ads': ads, 'total_quantity': total_quantity, 'total_price': total_price})
 @login_required
 def postads(request):
     if request.method == 'POST':

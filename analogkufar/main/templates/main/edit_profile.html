@@ -18,13 +18,13 @@
         <p>{{ profile.bio }}</p>
     </div>
 </div>
-
+<div class="editprofil">
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Сохранить</button>
 </form>
-
-<div class="myads"><a href="{% url 'myads' %}"class="button">мои обьявления</a></div>
- <div class="myads"><button class="button" onclick="location.href='{% url 'logout' %}?next=/'">Logout</button></div>
+</div>
+<!--<div class="myads"><a href="{% url 'myads' %}"class="button">мои обьявления</a></div>-->
+<!-- <div class="myads"><button class="button" onclick="location.href='{% url 'logout' %}?next=/'">Logout</button></div>-->
 {% endblock %}

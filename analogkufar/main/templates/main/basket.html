@@ -12,8 +12,8 @@
 
 
 {% block content %}
+
 <div style="text-align: center;">
-  <h2>Контент</h2>
   <p>Корзина покупок...</p>
 </div>
 {% for ad in ads %}
@@ -44,7 +44,14 @@
         </div>
       </div>
     </div>
+
   </div>
 {% endfor %}
+
+<div class="basket-info">
+    <p>всего товаров ({{ total_quantity }})</p>
+    <p>общая стоимость {{ total_price }}</p>
+</div>
+
 
 {% endblock %}

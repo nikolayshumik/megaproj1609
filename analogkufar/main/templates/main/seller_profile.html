@@ -40,10 +40,10 @@
             </form>
 
 </div>
-<div class="ad-container" style="padding-left: 15%; width: 60%;">
+<div class="ad-containerseller" style="padding-left: 15%; width: 60%;">
     {% for ad in ads %}
-    <div class="ad-item" style="display: flex; flex-direction: row; align-items: center; width: 100%; margin-bottom: 2rem; border: 1px solid #ccc; padding: 1rem;">
-        <div class="ad-description" style="display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; margin-right: 1rem;">
+    <div class="ad-itemseller" style="display: flex; flex-direction: row; align-items: center; width: 100%; margin-bottom: 2rem; border: 1px solid #ccc; padding: 1rem;">
+        <div class="ad-descriptionseller" style="display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; margin-right: 1rem;">
             <div>
                 <h3>{{ ad.title }}</h3>
                 <p><strong>Price:</strong> {{ ad.price }}</p>
@@ -62,7 +62,7 @@
                 <button type="button" class="buy-button">Купить</button>
             </div>
         </div>
-        <img class="ad-image" src="{{ ad.photo.url }}" alt="Ad Image" style="width: 340px; height: 180px; object-fit: cover;">
+        <img class="ad-imageseller" src="{{ ad.photo.url }}" alt="Ad Image" style="width: 340px; height: 180px; object-fit: cover;">
     </div>
     {% endfor %}
 </div>

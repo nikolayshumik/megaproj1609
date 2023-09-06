@@ -18,11 +18,22 @@
         <h1>{{ profile.user.username }}</h1>
         <p>{{ profile.bio }}</p>
     </div>
+    <div class="redactionbutton">
     <div class="myads"><a href="{% url 'profiles_edit' %}"class="button">Редактировать</a></div>
+        <div class="myads"><a href='{% url 'logout' %}?next=/'">Выйти</a></div>
+        </div>
 </div>
-<div class="spisokads">
+<div class="spisokadsprofile">
+  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
+  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
+  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
+  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
+  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
+  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
+  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
+  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
   <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
 <!--  <div class="myads"><button class="button" onclick="location.href='{% url 'logout' %}?next=/'">Выйти</button></div>-->
-  <div class="myads"><a href='{% url 'logout' %}?next=/'">Выйти</a></div>
+
 </div>
 {% endblock %}
