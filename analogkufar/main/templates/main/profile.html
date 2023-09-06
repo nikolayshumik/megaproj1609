@@ -1,0 +1,28 @@
+{% extends "main/index.html" %}
+{% load static %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block content %}
+
+
+<div class="profile-block">
+    <div class="profile-left">
+  {% if profile.photo %}
+    <img src="{{ profile.photo.url }}" alt="Profile Photo" class="profilephoto">
+  {% endif %}
+</div>
+    <div class="profile-right">
+        <h1>{{ profile.user.username }}</h1>
+        <p>{{ profile.bio }}</p>
+    </div>
+    <div class="myads"><a href="{% url 'profiles_edit' %}"class="button">Редактировать</a></div>
+</div>
+<div class="spisokads">
+  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
+<!--  <div class="myads"><button class="button" onclick="location.href='{% url 'logout' %}?next=/'">Выйти</button></div>-->
+  <div class="myads"><a href='{% url 'logout' %}?next=/'">Выйти</a></div>
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+/* Общие стили */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+}
+
+h2, h3 {
+  color: #2f3c4e;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Стили для корзины */
+.basket-ad {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.basket-image img {
+  width: 150px;
+  height: auto;
+  border-radius: 3px;
+}
+
+.basket-description {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+}
+
+.buy-button,
+.details-button,
+.delete-button {
+  background-color: #59a1c1;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+.buy-button:hover,
+.details-button:hover,
+.delete-button:hover {
+  background-color: #75b2cf;
+}
+
+input {
+  display: none;
+}
+
+/* Футуристичный стиль */
+.futuristic {
+  color: #59a1c1;
+  border-color: #59a1c1;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.buy-button.futuristic:hover,
+.details-button.futuristic:hover,
+.delete-button.futuristic:hover {
+  background-color: #4b86aa;
+}

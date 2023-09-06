@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+   <link rel="stylesheet" href="{% static 'main/css/register.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" href="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+    <script type="text/javascript" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div class=" bg-gray-300">
+    <div class="container flex justify-center py-20">
+
+       <div class="p-8 bg-white rounded-lg max-w-md pb-10">
+
+           <div class="flex justify-center mb-4">
+
+            <img src="https://i.imgur.com/f6Tb5U1.png" width="70">
+
+           </div>
+<form  method="post">
+    {% csrf_token %}
+
+    <input class="h-12 rounded w-full border px-3 focus:text-black focus:border-blue-100" type="text" name="username" placeholder="Username" required="">
+
+<input class="h-12 mt-3 rounded w-full border px-3 focus:text-black focus:border-blue-100" type="email" name="email" placeholder="Email" required="">
+
+<input class="h-12 mt-3 rounded w-full border px-3 focus:text-black focus:border-blue-100" type="password" name="password1" placeholder="Password" required="">
+
+<input class="h-12 mt-3 rounded w-full border px-3 focus:text-black focus:border-blue-100" type="password" name="password2" placeholder="Confirm Password" required="">
+
+
+
+          <button class="uppercase h-12 mt-3 text-white w-full rounded bg-red-700 hover:bg-red-800">Register</button>
+{{ form.errors }}
+</form>
+          <div class="flex justify-between items-center mt-3">
+
+            <hr class="w-full">
+            <span class="p-2 text-gray-400 mb-1">OR</span>
+            <hr class="w-full">
+
+          </div>
+
+
+          <button class="uppercase h-12 mt-3 text-white w-full rounded bg-blue-800 hover:bg-blue-900"><i class="fa fa-facebook mr-2"></i>Facebook</button>
+          <button class="uppercase h-12 mt-3 text-white w-full rounded bg-red-800 hover:bg-red-900"><i class="fa fa-google mr-2"></i>Google</button>
+
+
+       </div>
+
+    </div>
+  </div>
+<a href="{% url 'login' %}">логин акк</a>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{% extends "main/index.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <!-- Подключаем свои собственные стили -->
+    <link rel="stylesheet" href="{% static 'main/css/test.css' %}">
+
+
+{% endblock %}
+
+{% block title %}О нас{% endblock %}
+
+
+{% block content %}
+<div style="text-align: center;">
+  <h2>Контент</h2>
+  <p>Корзина покупок...</p>
+</div>
+{% for ad in ads %}
+  <div class="basket-ad">
+    <div class="basket-content">
+      <div class="basket-image">
+        <img src="{{ ad.photo.url }}" alt="Ad Image">
+      </div>
+      <div class="basket-description">
+        <h3>{{ ad.title }}</h3>
+        <p><strong>Price:</strong> {{ ad.price }}</p>
+        <div class="buttons-container">
+<!--          <form action="{% url 'basket' %}" method="post">-->
+<!--            {% csrf_token %}-->
+            <input type="hidden" name="ad_id" value="{{ ad.id }}">
+            <button type="submit" class="buy-button">Купить</button>
+<!--          </form>-->
+   <form action="{% url 'details' %}" method="get" class="details-form">
+    {% csrf_token %}
+    <input type="hidden" name="ad_id" value="{{ ad.id }}">
+    <button type="submit" class="details-button">Посмотреть детали</button>
+</form>
+         <form action="{% url 'delete_from_basket' %}" method="post" class="delete-form" data-ad-id="{{ ad.id }}">
+        {% csrf_token %}
+        <input type="hidden" name="ad_id" value="{{ ad.id }}">
+        <button class="delete-button">Удалить из корзины</button>
+      </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Мой сайт</title>
+</head>
+<body>
+  <div id="header">
+    <h1>Мой сайт</h1>
+    {% if user.is_authenticated %}
+      <p>Здравствуйте, {{ user.username }}</p>
+      <a href="{% url 'logout' %}">Выйти</a>
+    {% else %}
+      <a href="{% url 'login' %}">Вход</a>
+    {% endif %}
+  </div>
+
+  <div id="content">
+    {% block content %}{% endblock %}
+  </div>
+
+  <div id="footer">
+    <p>Все права защищены</p>
+  </div>
+</body>
+</html>

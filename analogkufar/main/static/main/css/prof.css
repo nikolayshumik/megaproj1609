@@ -1,0 +1,24 @@
+.profile-block {
+  display: flex;
+  align-items: center;
+}
+
+.profile-left {
+  width: 150px;
+}
+
+.profilephoto {
+  width: 100%;
+}
+
+.profile-right {
+  margin-left: 20px;
+}
+
+.profile-right h1 {
+  margin: 0;
+}
+
+.profile-right p {
+  margin-top: 10px;
+}

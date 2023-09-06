@@ -1,0 +1,448 @@
+/*шапка*/
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+        }
+
+           .search-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .search-input {
+        margin-right: 10px;
+    }
+
+    .search-button {
+        padding: 5px 10px;
+        background-color: black;
+        color: #fff;
+    }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-right: 180px;
+        }
+
+      .button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border: 1px solid black;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+        .content {
+            margin-top: 100px; /* учитывает высоту хэдера, чтобы контент не перекрывался */
+            padding: 20px;
+            font-size: 20px;
+            line-height: 1.5;
+
+        }
+
+/* форма подачи обьявления */
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+}
+
+.label {
+  text-align: center;
+  font-weight: bold;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* футер */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  background-color: #ddd;
+  padding: 10px;
+  text-align: center;
+  margin-top: auto;
+}
+
+p {
+  color: #000;
+}
+
+/* обьявления */
+    .ad-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    .ad-container-details{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+    }
+    .ad-item {
+        flex-basis: calc(25% - 30px);
+        margin: 10px;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ad-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .ad-description {
+        padding: 10px;
+        text-align: left;
+    }
+
+#yellowDiv {
+
+        background-color: white;
+        width: 500px;
+        height: 600px;
+        margin-right: 20px;
+        float: left;
+    }
+#yellowDivv {
+    position: fixed;
+    top: 120px;
+    left: 20px;
+    background-color: white;
+    width: 500px;
+    height: 600px;
+    margin-right: 20px;
+    float: left;
+    border: 2px solid black;
+}
+    #ads {
+        float: left;
+    }
+/* корзина*/
+.basket-ad {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.basket-content {
+  display: flex;
+  align-items: flex-start;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  margin-left: 100px;
+}
+
+.basket-image {
+  flex: 0 0 100px;
+}
+
+.basket-image img {
+  width: 179px;
+  height: auto;
+}
+
+.basket-description {
+  flex: 1 1 auto;
+  margin-left: 10px;
+}
+
+.basket-description h3 {
+  margin-top: 0;
+}
+
+.basket-description p {
+  margin-bottom: 8px;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: auto; /* Position buttons to the right */
+}
+
+button[type="submit"],
+.details-button,
+.delete-button,
+.buy-button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 2px;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+button[type="submit"]:hover,
+.details-button:hover,
+.delete-button:hover,
+.buy-button:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+/* кнопки купить и подробнее
+.details-button,.delete-button,
+  .buy-button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-right: 2px;
+    cursor: pointer;
+  }*/
+
+  /* детали подробнее */
+  .detailscont {
+ width: 50%;
+  margin-left: 20%;
+  border: 1px solid black;
+}
+
+.detailphoto{
+    width: 600px;
+  height: 500px;
+}
+.field{
+margin-left: 70px;
+}
+
+.profinfo {
+  position: fixed;
+  top: 120px;
+  right: 5%;
+  background-color: white;
+  width: 250px;
+  height: 170px;
+  margin-right: 26%;
+  float: left;
+  border: 2px solid white;
+}
+
+
+.write-button,
+.call-button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 2px;
+  margin-top: 5px;
+  cursor: pointer;
+  width: 250px;
+  font-size: 20px;
+}
+
+#yellowDivDetails {
+
+        background-color: yellow;
+        width: 500px;
+        height: 600px;
+        margin-right: 20px;
+        float: left;
+    }
+
+
+
+
+
+
+/* детали снизу похожие на подробнее */
+
+ .detailsads {
+        display: flex;
+        justify-content: flex-start;
+        width: 50%;
+        margin: 50px 0 100px 100px;
+    }
+
+.ad-containerdetail {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+
+
+/* мои обьявления */
+.myads{
+        margin-top: 20px;
+    }
+
+ .row {
+      display: flex;
+    }
+    .columnleft {
+      flex: 1;
+      padding: 10px;
+      margin-left: 20%;
+    }
+    .columnright {
+      flex: 1;
+      padding: 10px;
+      margin-right: 30%;
+    }
+
+
+.spisokads a {
+  display: inline-block;
+  padding: 10px 20px;
+  color: white;
+  background-color: black;
+  border: 1px solid black;
+  width:200px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.spisokads a:hover {
+  background-color: white;
+  color: black;
+}
+
+.spisokads a:active {
+  background-color: white;
+}
+
+.spisokads a:active span {
+  color: black;
+}
+
+    .myadsdiv{
+    border: 1px solid black;
+    width: 600px;
+    }
+
+    .myadsword {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; /* высота блока равная высоте видимой части страницы */
+  width: 400px; /* ширина блока равная ширине страницы */
+  margin-left: 25%;
+}
+
+.myadsword h1 {
+  text-align: center;
+}
+
+.correct-button{
+    background-color: black;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 2px;
+  cursor: pointer;
+  margin-left:20%;
+
+}
+
+.deletemyads-button{
+    background-color: black;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+/* профиль чуваков */
+.profile-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 600px;
+  margin-left: 20%;
+  border: 1px solid black;
+}
+
+.profile-left {
+  width: 150px;
+}
+
+.profilephoto {
+  width: 100%;
+}
+
+.profile-right {
+  margin-left: 20px;
+  flex-grow: 1; /* Добавьте это, чтобы блок растягивался на свободное пространство, если необходимо */
+}
+
+.profile-right h1 {
+  margin: 0;
+}
+
+.profile-right p {
+  margin-top: 10px;
+}
+
+/* нопки в профиле*/
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

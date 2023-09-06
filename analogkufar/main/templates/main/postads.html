@@ -1,0 +1,47 @@
+{% extends "main/index.html" %}
+
+{% block title %}О нас{% endblock %}
+
+{% block content %}
+<div style="text-align: center;">
+    <h2>Контент</h2>
+    <p>Подача обьявлений...</p>
+</div>
+<div class="form-wrapper">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div class="form-group">
+      <label class="label" for="{{ form.photo.id_for_label }}">Фотографии:</label>
+      {{ form.photo }}
+    </div>
+    <div class="form-group">
+      <label class="label" for="{{ form.title.id_for_label }}">Название товара:</label>
+      {{ form.title }}
+    </div>
+    <div class="form-group">
+      <label class="label" for="{{ form.category.id_for_label }}">Выбор категории:</label>
+      {{ form.category }}
+    </div>
+    <div class="form-group">
+      <label class="label" for="{{ form.description.id_for_label }}">Описание товара:</label>
+      {{ form.description }}
+    </div>
+    <div class="form-group">
+      <label class="label" for="{{ form.price.id_for_label }}">Цена товара:</label>
+      {{ form.price }}
+    </div>
+    <div class="form-group">
+      <label class="label" for="{{ form.location.id_for_label }}">Местоположение:</label>
+      {{ form.location }}
+    </div>
+    <div class="form-group">
+      <label class="label" for="{{ form.phone_number.id_for_label }}">Номер телефона:</label>
+      {{ form.phone_number }}
+    </div>
+
+    <div class="form-group">
+      <button class="submit-btn" type="submit">Отправить</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

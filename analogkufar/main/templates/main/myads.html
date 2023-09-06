@@ -1,0 +1,46 @@
+{% extends "main/index.html" %}
+
+{% block content %}
+  <div  class="myadsword"><h1>Мои объявления</h1></div>
+
+  <div class="row">
+    <div class="columnleft">
+      {% if ads %}
+
+          {% for ad in ads %}
+            {% if ad.user == request.user %}
+              <div class="spisokads"><a class="title" href="{% url 'ad_details' ad.id %}">{{ ad.title }}</a></div>
+            {% endif %}
+          {% endfor %}
+
+      {% else %}
+        <p>У вас пока нет объявлений.</p>
+      {% endif %}
+    </div>
+
+    <div class="columnright">
+      {% if equal_ad_id %}
+        {% for ad in ads %}
+          {% if equal_ad_id == ad.id %}
+      <div class="myadsdiv">
+            <img src="{{ ad.photo.url }}" alt="Ad Photo" class="detailphoto">
+            <h1 class="field">{{ ad.title }}</h1>
+            <p class="field">Категория: {{ ad.category }}</p>
+            <p class="field">Описание:{{ ad.description }}</p>
+            <p class="field">Цена: {{ ad.price }}</p>
+            <p class="field">Местоположение: {{ ad.location }}</p>
+            <p class="field">Телефонный номер: {{ ad.phone_number }}</p>
+          <a href="{% url 'edit_ad' ad.id %}" class="correct-button">Редактировать</a>
+          <form method="POST" action="{% url 'delete_ad' ad.id %}">
+          {% csrf_token %}
+          <button type="submit" class="deletemyads-button">Удалить объявление</button>
+        </form>
+
+        </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock %}
