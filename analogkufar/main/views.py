@@ -22,30 +22,35 @@ from .service import send
 from .models import Order
 from .tasks import send_order_confirmation_email
 
-
+from django.db.models import Q
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from .models import Message
 from .forms import MessageForm
 
-@login_required
-def compose_message(request):
+def compose_message(request, user_id):
+    recipient = get_object_or_404(User, id=user_id)
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
             message = form.save(commit=False)
             message.sender = request.user
+            message.recipient = recipient
             message.save()
-            return redirect('inbox')
+            form = MessageForm()
     else:
         form = MessageForm()
 
-    return render(request, 'main/compose.html', {'form': form})
+    messages = Message.objects.filter(
+        sender__in=[request.user, recipient],
+        recipient__in=[request.user, recipient]
+    ).order_by('created_at')
+
+    return render(request, 'main/compose.html', {'form': form, 'messages': messages, 'recipient': recipient})
 
 @login_required
-def inbox(request):
-    messages = Message.objects.filter(recipient=request.user)
-    return render(request, 'main/inbox.html', {'messages': messages, 'message_count': messages.count})
+def user_list(request):
+    users = User.objects.exclude(id=request.user.id)
+    return render(request, 'main/user_list.html', {'users': users})
 
 def seller_profile(request, user_id):
     profile = get_object_or_404(Profile, user_id=user_id)

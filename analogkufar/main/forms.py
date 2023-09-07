@@ -8,11 +8,9 @@ from .models import Message
 
 
 class MessageForm(forms.ModelForm):
-    recipient = forms.ModelChoiceField(queryset=User.objects.all())
-
     class Meta:
         model = Message
-        fields = ['recipient', 'subject', 'content']
+        fields = ['subject', 'content']
 
 class ContactForm(forms.ModelForm):
     class Meta:

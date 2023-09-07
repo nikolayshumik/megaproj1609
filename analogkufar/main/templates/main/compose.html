@@ -5,7 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-<h2>Compose Message</h2>
+{% for message in messages %}
+    <strong>{% if message.sender == request.user %}You{% else %}{{ message.sender.username }}{% endif %}: </strong>{{ message.content }}<br>
+{% endfor %}
+<br>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
