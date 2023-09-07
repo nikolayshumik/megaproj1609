@@ -22,7 +22,7 @@ from .service import send
 from .models import Order
 from .tasks import send_order_confirmation_email
 
-from django.db.models import Q
+
 from django.shortcuts import render, redirect
 from .models import Message
 from .forms import MessageForm

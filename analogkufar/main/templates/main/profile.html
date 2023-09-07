@@ -26,7 +26,7 @@
 <div class="spisokadsprofile">
   <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>
   <div class="myads">
-    <a href="{% url 'inbox' %}" class="button">
+    <a href="{% url 'user_list' %}" class="button">
         Мои сообщения
         {% if messages.count %}
             ({{ messages.count }})

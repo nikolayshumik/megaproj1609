@@ -10,7 +10,7 @@ from .models import Message
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
-        fields = ['subject', 'content']
+        fields = ['content']
 
 class ContactForm(forms.ModelForm):
     class Meta:
