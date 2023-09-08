@@ -12,20 +12,26 @@ from django.contrib.auth.models import User
 from .forms import ProfileForm
 from .models import Profile
 from .forms import AdFilterForm
-
+from .models import Purchase
+from django.conf import settings
 from django.views.generic import CreateView
 from .models import Contact
 from .forms import ContactForm
 from .service import send
 # from .tasks import write_file
-
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import Order
 from .tasks import send_order_confirmation_email
 
-
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from .models import Message
 from .forms import MessageForm
+from django.core.mail import send_mail
+
+from .forms import MessageFormEmail
+
 
 def compose_message(request, user_id):
     recipient = get_object_or_404(User, id=user_id)
@@ -37,6 +43,8 @@ def compose_message(request, user_id):
             message.recipient = recipient
             message.save()
             form = MessageForm()
+            # Redirect after successfully sending message
+            return redirect('compose_message', user_id=user_id)
     else:
         form = MessageForm()
 
@@ -315,6 +323,51 @@ def delete_ad(request, ad_id):
     return HttpResponseNotAllowed(['POST'])
 
 
-def buy(request):
+def buy_page(request):
     return render(request, 'main/buy.html')
 
+def buy(request):
+    if request.method == 'POST':  # Проверяем, был ли отправлен POST запрос
+        return redirect('/buy/')  # Перенаправляем на buy.html
+    return render(request, 'main/buy.html')
+
+def send_email(request):
+    subject = "AnalogKufar"
+    message = "Ваш заказ принят ."
+    from_email = settings.EMAIL_HOST_USER
+    recipient_list = ['nikolayshumik@gmail.com']
+    send_mail(subject, message, from_email, recipient_list)
+def submit_order(request):
+    if request.method == 'POST':
+        # Обработка данных заказа
+        city = request.POST['city']
+        postal_code = request.POST['postal_code']
+        full_name = request.POST['full_name']
+        tel = request.POST['tel']
+        payment_method = request.POST['payment_method']
+
+        # Создание нового объекта Purchase и сохранение его в базу данных
+        purchase = Purchase(
+            city=city,
+            postal_code=postal_code,
+            full_name=full_name,
+            tel=tel,
+            payment_method=payment_method
+        )
+        purchase.save()
+
+        if payment_method == 'cash_on_delivery':
+            send_email(request)
+            return redirect('order_confirmation')
+        elif payment_method == 'online_payment':
+            return HttpResponseRedirect(reverse('online_payment'))
+
+
+        return redirect('order_confirmation')
+
+
+    return render(request, 'main/buy.html')
+
+def online_payment(request):
+    # Логика онлайн-оплаты и рендеринг шаблона
+    return render(request, 'main/online_payment.html')

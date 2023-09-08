@@ -5,8 +5,9 @@ from .models import Ad
 from .models import Contact
 from .models import Profile
 from .models import Message
-
-
+from django.core.mail import BadHeaderError, send_mail
+from django.http import HttpResponse
+from .models import MessageEmail
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
@@ -93,3 +94,22 @@ class AdFilterForm(forms.Form):
     price_min = forms.DecimalField(label='Минимальная цена', required=False)
     price_max = forms.DecimalField(label='Максимальная цена', required=False)
     location = forms.ChoiceField(label='Регион', choices=Ad.LOCATION_CHOICES, required=False)
+
+
+class MessageFormEmail(forms.ModelForm):
+    class Meta:
+        model = MessageEmail
+        fields = ('name', 'email', 'message')
+
+    def send_email(self):
+        name = self.cleaned_data['name']
+        email = self.cleaned_data['email']
+        message = self.cleaned_data['message']
+        subject = 'Question from {}'.format(name)
+        message = 'From: {}\n\n{}'.format(email, message)
+        from_email = 'testdjangosmeta@mail.ru'
+        recipient_list = ['testdjangosmeta@mail.ru']
+        try:
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+        except BadHeaderError:
+            return HttpResponse('Invalid header found.')

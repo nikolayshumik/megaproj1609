@@ -1,58 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Chat</title>
-    <style>
-        .message-container {
-            display: flex;
-            justify-content: space-between;
-            flex-direction: column;
-            padding: 1rem;
-            height: 70vh;
-            overflow: auto;
-            border: 1px solid #ccc;
-            margin-bottom: 1rem;
-            font-family: Arial, sans-serif;
-        }
-        .message {
-            display: flex;
-            max-width: 60%;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            background-color: #f0f0f0;
-            border-radius: 4px;
-            padding: 0.5rem;
-        }
-        .message.sender {
-            justify-self: end;
-            background-color: #0af;
-            color: white;
-            margin-left: auto;
-        }
-        form {
-            display: flex;
-            gap: 1rem;
-        }
-        textarea {
-            resize: none;
-            height: 50px;
-            flex-grow: 1;
-        }
-    </style>
-</head>
-<body>
-    <div class="message-container">
-        {% for message in messages %}
-            <div class="message {% if message.sender == request.user %}sender{% endif %}">
-                <strong>{% if message.sender == request.user %}You{% else %}{{ message.sender.username }}{% endif %}:</strong>&nbsp;
-                {{ message.content }}</div>
-        {% endfor %}
+{% extends "main/index.html" %}
+
+{% block content %}
+
+ <div class="container">
+  <div class="message-container">
+    {% for message in messages %}
+    <div class="message {% if message.sender == request.user %}sender{% endif %}">
+      <strong>{% if message.sender == request.user %}You{% else %}{{ message.sender.username }}{% endif %}:</strong>&nbsp; {{ message.content }}
     </div>
-    <form method="post">
-        {% csrf_token %}
-        <textarea name="content"></textarea>
-        <button type="submit">Send</button>
-    </form>
-</body>
-</html>
+    {% endfor %}
+  </div>
+
+  <form class="form1" method="post">
+    {% csrf_token %}
+    <textarea class="textarea1" name="content"></textarea>
+    <button class="button1" type="submit">Send</button>
+  </form>
+</div>
+
+{% endblock %}
+

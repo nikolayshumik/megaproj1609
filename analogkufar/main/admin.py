@@ -7,6 +7,7 @@ from .models import UserAd
 from .models import Order
 from .models import Contact
 from .models import Profile
+from .models import Purchase
 
 
 
@@ -19,6 +20,7 @@ admin.site.register(UserAd)
 admin.site.register(Order)
 admin.site.register(Contact)
 admin.site.register(Profile)
+admin.site.register(Purchase)
 
 
 

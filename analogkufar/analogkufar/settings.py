@@ -95,12 +95,13 @@ CACHES = {
     }
 }
 
-# smtp
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'metelstas6@gmail.com'
-EMAIL_HOST_PASSWORD = 'stas12345123'
 EMAIL_PORT = 587
+EMAIL_HOST_USER = 'testdjangosmeta@mail.ru'
+EMAIL_HOST_PASSWORD = 'UQktKiAeq3Fnzzz4yqe0'
 
 
 # Password validation

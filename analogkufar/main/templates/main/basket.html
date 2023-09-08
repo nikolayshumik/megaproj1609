@@ -29,7 +29,10 @@
 <!--          <form action="{% url 'basket' %}" method="post">-->
 <!--            {% csrf_token %}-->
             <input type="hidden" name="ad_id" value="{{ ad.id }}">
-            <button type="submit" class="buy-button">Купить</button>
+                          <form method="post" action="{% url 'buy' %}">
+  {% csrf_token %}
+  <button type="submit" class="buy-button">Купить</button>
+</form>
 <!--          </form>-->
    <form action="{% url 'details' %}" method="get" class="details-form">
     {% csrf_token %}

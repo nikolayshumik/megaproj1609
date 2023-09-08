@@ -139,6 +139,7 @@ p {
         justify-content: flex-end;
         width: 1000px;
         margin-left: 30%;
+        flex-direction: row-reverse;
 
 
     }
@@ -508,3 +509,56 @@ margin-left: 70px;
         padding: 10px;
         text-align: left;
     }
+
+/* Диалоговое окно */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 400px;
+    height: 400px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+}
+
+.message {
+    display: flex;
+    max-width: 60%;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.message.sender {
+    justify-self: end;
+    background-color: #0af;
+    color: white;
+    margin-left: auto;
+}
+
+form1 {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+}
+
+textarea1 {
+    resize: none;
+    height: 100px;
+    flex-grow: 1;
+    font-family: Arial, sans-serif;
+}
+
+button1[type="submit"] {
+    height: 30px;
+    width: 100px;
+}

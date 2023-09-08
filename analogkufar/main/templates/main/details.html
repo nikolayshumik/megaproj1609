@@ -23,7 +23,7 @@
     {{ ad.price }}<br>
     {{ ad.title }}<br>
     {% endif %}
-<button class="write-button"><a href="{% url 'compose_message' %}">Написать продавцу</a></button><br>
+<button class="write-button"><a href="{% url 'user_list' %}">Написать продавцу</a></button><br>
 <button class="call-button">Позвонить</button>
 <button class="call-button"><a href="{% url 'seller_profile' user_id=ad.user.id %}">Профиль продавца</a></button>
 

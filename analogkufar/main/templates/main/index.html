@@ -78,7 +78,11 @@
     <input type="hidden" name="ad_id" value="{{ ad.id }}">
     <button type="submit" class="details-button">Посмотреть детали</button>
 </form>
-              <button type="button" class="buy-button">Купить</button>
+
+              <form method="post" action="{% url 'buy' %}">
+  {% csrf_token %}
+  <button type="submit" class="buy-button">Купить</button>
+</form>
 
             </div>
 

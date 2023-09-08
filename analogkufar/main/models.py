@@ -124,3 +124,23 @@ class Message(models.Model):
 
     def __str__(self):
         return self.content
+
+
+class Purchase(models.Model):
+    city = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=10)
+    full_name = models.CharField(max_length=100)
+    tel = models.CharField(max_length=100, default='')
+    payment_method = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.full_name
+
+class MessageEmail(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    message = models.TextField()
+    date_sent = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
