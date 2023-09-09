@@ -3,12 +3,47 @@
 {% block title %}О нас{% endblock %}
 
 {% block content %}
-    <h2>Регистрация</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="button" type="submit">Зарегистрироваться</button>
-</form>
+<style>
 
-<a href="#">Уже есть аккаунт?</a> or <a href="{% url 'login' %}">Войти</a>
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form p {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.label, .button {
+    display: inline-block;
+    margin: 5px 0;
+}
+
+.button {
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.button:hover {
+    background-color: white;
+}
+</style>
+<div class="container">
+    <h2>Регистрация</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Зарегистрироваться</button>
+    </form>
+
+    <a href="{% url 'login' %}" class="button">Уже есть аккаунт?</a> or <a class="button"
+                                                                           href="{% url 'login' %}">Войти</a>
+</div>
 {% endblock %}
