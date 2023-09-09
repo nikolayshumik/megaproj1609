@@ -540,7 +540,7 @@ margin-left: 70px;
 
 .message.sender {
     justify-self: end;
-    background-color: #0af;
+    background-color: black;
     color: white;
     margin-left: auto;
 }

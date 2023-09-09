@@ -55,10 +55,16 @@ def compose_message(request, user_id):
 
     return render(request, 'main/compose.html', {'form': form, 'messages': messages, 'recipient': recipient})
 
+
 @login_required
-def user_list(request):
+def user_list(request, user_id):
+    profile = get_object_or_404(User, id=user_id)
     users = User.objects.exclude(id=request.user.id)
-    return render(request, 'main/user_list.html', {'users': users})
+
+    # Получаем список объявлений, созданных пользователем
+    ads = Ad.objects.filter(user=profile)
+
+    return render(request, 'main/user_list.html', {'users': users, 'profile': profile, 'ads': ads})
 
 def seller_profile(request, user_id):
     profile = get_object_or_404(Profile, user_id=user_id)
@@ -323,14 +329,14 @@ def delete_ad(request, ad_id):
     return HttpResponseNotAllowed(['POST'])
 
 
-def buy_page(request):
-    return render(request, 'main/buy.html')
-
 def buy(request):
-    if request.method == 'POST':  # Проверяем, был ли отправлен POST запрос
-        return redirect('/buy/')  # Перенаправляем на buy.html
-    return render(request, 'main/buy.html')
+    ads = Ad.objects.all()
+    ad_id = request.GET.get('ad_id')  # Получаем id объявления из параметра GET-запроса
+    ad = None
+    if ad_id:
+        ad = Ad.objects.get(id=ad_id)  # Получаем объявление по id
 
+    return render(request, 'main/buy.html', {'ad': ad, 'ads': ads})
 def send_email(request):
     subject = "AnalogKufar"
     message = "Ваш заказ принят ."

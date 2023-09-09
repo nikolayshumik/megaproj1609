@@ -2,66 +2,64 @@
 {% load static %}
 
 
-
 {% block title %}О нас{% endblock %}
 
 {% block content %}
 
 <div class="detailscont">
-  {% if ad %}
-   <img src="{{ ad.photo.url }}" alt="Ad Photo" class="detailphoto">
-  <h1 class="field">{{ ad.title }}</h1>
-  <p class="field">Категория: {{ ad.category }}</p>
-  <p class="field">Описание:</h4><br> {{ ad.description }}</p>
-  <p class="field">Цена: {{ ad.price }}</p>
-  <p class="field">Местоположение: {{ ad.location }}</p>
-  <p class="field">Телефонный номер: {{ ad.phone_number }}</p>
-  {% endif %}
+    {% if ad %}
+    <img src="{{ ad.photo.url }}" alt="Ad Photo" class="detailphoto">
+    <h1 class="field">{{ ad.title }}</h1>
+    <p class="field">Категория: {{ ad.category }}</p>
+    <p class="field">Описание:</h4><br> {{ ad.description }}</p>
+    <p class="field">Цена: {{ ad.price }}</p>
+    <p class="field">Местоположение: {{ ad.location }}</p>
+    <p class="field">Телефонный номер: {{ ad.phone_number }}</p>
+    {% endif %}
 </div>
 <div class="profinfo">
     {% if ad %}
     {{ ad.price }}<br>
     {{ ad.title }}<br>
     {% endif %}
-<button class="write-button"><a href="{% url 'user_list' %}">Написать продавцу</a></button><br>
-<button class="call-button">Позвонить</button>
-<button class="call-button"><a href="{% url 'seller_profile' user_id=ad.user.id %}">Профиль продавца</a></button>
+    <button class="write-button">
+        <a href="{% url 'user_list' user_id=ad.user.id %}">Написать продавцу</a>
+    </button>
+    <br>
+    <button class="call-button">Позвонить</button>
+    <button class="call-button"><a href="{% url 'seller_profile' user_id=ad.user.id %}">Профиль продавца</a></button>
 
 </div>
 
 <div>Похожее на то что искали
 </div>
 
-    <div class="detailsads">
-        <div class="ad-container">
-            {% for other in ads %}
-            {% if other.category == ad.category %}
-            <div class="ad-item">
-                <form action="{% url 'basket' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="ad_id" value="{{ other.id }}">
-                    <img class="ad-image" src="{{ other.photo.url }}" alt="Ad Image">
-                    <div class="ad-description">
-                        <p><strong>Price:</strong> {{ other.price }}</p>
-                        <h3>{{ other.title }}</h3>
-                        <button type="submit">в корзину</button>
+<div class="detailsads">
+    <div class="ad-container">
+        {% for other in ads %}
+        {% if other.category == ad.category %}
+        <div class="ad-item">
+            <form action="{% url 'basket' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="ad_id" value="{{ other.id }}">
+                <img class="ad-image" src="{{ other.photo.url }}" alt="Ad Image">
+                <div class="ad-description">
+                    <p><strong>Price:</strong> {{ other.price }}</p>
+                    <h3>{{ other.title }}</h3>
+                    <button type="submit">в корзину</button>
 
-                    </form>
-                    <form action="{% url 'details' %}" method="get" class="details-form">
-                        {% csrf_token %}
-                        <input type="hidden" name="ad_id" value="{{ other.id }}">
-                        <button type="submit" class="details-button">Посмотреть детали</button>
-                    </form>
-                    <button type="button" class="buy-button">Купить</button>
-                </div>
-            </div>
-            {% endif %}
-            {% endfor %}
+            </form>
+            <form action="{% url 'details' %}" method="get" class="details-form">
+                {% csrf_token %}
+                <input type="hidden" name="ad_id" value="{{ other.id }}">
+                <button type="submit" class="details-button">Посмотреть детали</button>
+            </form>
+            <button type="button" class="buy-button">Купить</button>
         </div>
-
-
-
-
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
 
 
 {% endblock %}

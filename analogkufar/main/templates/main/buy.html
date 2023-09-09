@@ -55,41 +55,56 @@
   display: flex;
   flex-direction: row;
   }
+   .detailphotobuy {
+   width: 90px;
+   height: 70px;
+}
+
+
+
+
 </style>
 <div class="sqform">
-<div class="form-container">
-  <form method="post" action="{% url 'submit_order' %}">
-    {% csrf_token %}
-    <label for="city">Город:</label>
-    <select name="city" id="city">
-      <option value="1">Город 1</option>
-      <option value="2">Город 2</option>
-      <option value="3">Город 3</option>
-      <option value="4">Город 4</option>
-      <option value="5">Город 5</option>
-      <option value="6">Город 6</option>
-    </select>
+    <div class="form-container">
+        <form method="post" action="{% url 'submit_order' %}">
+            {% csrf_token %}
+            <label for="city">Город:</label>
+            <select name="city" id="city">
+                <option value="1">Город 1</option>
+                <option value="2">Город 2</option>
+                <option value="3">Город 3</option>
+                <option value="4">Город 4</option>
+                <option value="5">Город 5</option>
+                <option value="6">Город 6</option>
+            </select>
 
-    <label for="postal_code">Почтовый индекс:</label>
-    <input type="text" name="postal_code" id="postal_code" required>
+            <label for="postal_code">Почтовый индекс:</label>
+            <input type="text" name="postal_code" id="postal_code" required>
 
-    <label for="full_name">Фамилия и имя получателя:</label>
-    <input type="text" name="full_name" id="full_name" required>
+            <label for="full_name">Фамилия и имя получателя:</label>
+            <input type="text" name="full_name" id="full_name" required>
 
-    <label for="tel">Телефон:</label>
-    <input type="text" name="tel" id="tel" required>
+            <label for="tel">Телефон:</label>
+            <input type="text" name="tel" id="tel" required>
 
-    <label for="payment_method">Способ оплаты:</label>
-    <select name="payment_method" id="payment_method">
-      <option value="cash_on_delivery">Оплата при получении</option>
-      <option value="online_payment">Онлайн оплата</option>
-    </select>
+            <label for="payment_method">Способ оплаты:</label>
+            <select name="payment_method" id="payment_method">
+                <option value="cash_on_delivery">Оплата при получении</option>
+                <option value="online_payment">Онлайн оплата</option>
+            </select>
 
-    <button type="submit" class="buy-button">Отправить заказ</button>
-  </form>
+            <button type="submit" class="buy-button">Отправить заказ</button>
+        </form>
 
-</div>
-   <div class="square-div"></div>
+    </div>
+    <div class="square-div">
+
+            <img src="{{ ad.photo.url }}" alt="Ad Photo" class="detailphotobuy">
+
+        <h3>{{ ad.title }}</h3>
+        <h3>{{ ad.price }}</h3>
+
+    </div>
 </div>
 
 
