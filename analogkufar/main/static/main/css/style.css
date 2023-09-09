@@ -282,19 +282,26 @@ margin-left: 70px;
 }
 
 
-.write-button,
-.call-button {
-  background-color: black;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  margin-right: 2px;
-  margin-top: 5px;
-  cursor: pointer;
-  width: 250px;
-  font-size: 20px;
+.buttonprof {
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  border: 1px solid black;
 }
 
+.no-underline {
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  padding: 8px 16px;
+}
+.no-underline:hover {
+  text-decoration: none;
+  color: black;
+  background-color: white;
+}
 #yellowDivDetails {
 
         background-color: yellow;

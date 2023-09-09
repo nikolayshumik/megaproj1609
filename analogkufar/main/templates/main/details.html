@@ -22,17 +22,15 @@
     {{ ad.price }}<br>
     {{ ad.title }}<br>
     {% endif %}
-    <button class="write-button">
-        <a href="{% url 'user_list' user_id=ad.user.id %}">Написать продавцу</a>
-    </button>
-    <br>
-    <button class="call-button">Позвонить</button>
-    <button class="call-button"><a href="{% url 'seller_profile' user_id=ad.user.id %}">Профиль продавца</a></button>
+
+    <a class="no-underline buttonprof" href="{% url 'user_list' user_id=ad.user.id %}">Написать продавцу</a>
+
+    <a class="no-underline buttonprof" href="{% url 'seller_profile' user_id=ad.user.id %}">Профиль продавца</a>
 
 </div>
 
-<div>Похожее на то что искали
-</div>
+<div style="margin-left: 30%; margin-top: 40px;">Похожее на то что искали</div>
+
 
 <div class="detailsads">
     <div class="ad-container">
