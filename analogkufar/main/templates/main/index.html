@@ -9,10 +9,10 @@
 <div class="header">
     <div class="logo">Логотип</div>
     <div class="navigation">
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Поиск товара">
-            <button class="search-button">Найти</button>
-        </div>
+       <div class="search-container">
+    <input type="text" name="search" class="search-input" placeholder="Поиск товара">
+    <button class="search-button">Найти</button>
+</div>
         {% if user.is_authenticated %}
         <div class="buttons">
             <a href="{% url 'postads' %}" class="button">Подать объявление</a>
@@ -36,30 +36,35 @@
 <div class="content">
     {% block content %}
     <div class="filterindex">
-        <form action="{% url 'home' %}" method="get">
-            <label for="from">Цена:</label><br>
-            <input type="number" name="from" placeholder="От">
-            <input type="number" name="to" placeholder="До"><br>
+         <h3>Фильтры</h3>
+    <form method="get" action="">
+        {{ filter_form.as_p }}
+        <button type="submit" class="btn btn-primary">Фильтровать</button>
+    </form>
+<!--        <form action="{% url 'home' %}" method="get">-->
+<!--            <label for="from">Цена:</label><br>-->
+<!--            <input type="number" name="from" placeholder="От">-->
+<!--            <input type="number" name="to" placeholder="До"><br>-->
 
-            <label for="category">Категория:</label>
-            <select name="category">
-                <option value="">Все категории</option>
-                <option value="обувь">Обувь</option>
-                <option value="одежда">Одежда</option>
-                <option value="развлечения">Развлечения</option>
-                <!-- Add more category options -->
-            </select><br>
+<!--            <label for="category">Категория:</label>-->
+<!--            <select name="category">-->
+<!--                <option value="">Все категории</option>-->
+<!--                <option value="обувь">Обувь</option>-->
+<!--                <option value="одежда">Одежда</option>-->
+<!--                <option value="развлечения">Развлечения</option>-->
+<!--                &lt;!&ndash; Add more category options &ndash;&gt;-->
+<!--            </select><br>-->
 
-            <label for="location">Локация:</label>
-            <select name="location">
-                <option value="">Все локации</option>
-                <option value="MT">Минская область</option>
-                <option value="BR">Брестская область</option>
-                <!-- Add more location options -->
-            </select><br>
+<!--            <label for="location">Локация:</label>-->
+<!--            <select name="location">-->
+<!--                <option value="">Все локации</option>-->
+<!--                <option value="MT">Минская область</option>-->
+<!--                <option value="BR">Брестская область</option>-->
+<!--                &lt;!&ndash; Add more location options &ndash;&gt;-->
+<!--            </select><br>-->
 
-            <button type="submit">Сортировать и фильтровать</button>
-        </form>
+<!--            <button type="submit">Сортировать и фильтровать</button>-->
+<!--        </form>-->
     </div>
     <div class="ad-container">
         {% for ad in ads %}

@@ -176,31 +176,58 @@ def register_view(request):
 
 def index(request):
     ads = Ad.objects.all()
+    filter_form = AdFilterForm(
+        request.GET)  # Создайте экземпляр формы, используйте переданные GET-параметры для фильтрации (если есть)
+    if filter_form.is_valid():
+        title = filter_form.cleaned_data.get('title')
+        # category = filter_form.cleaned_data.get('category')
+        location = filter_form.cleaned_data.get('location')
+        price_min = filter_form.cleaned_data.get('price_min')
+        price_max = filter_form.cleaned_data.get('price_max')
 
-    from_price = request.GET.get('from')
-    to_price = request.GET.get('to')
-    category = request.GET.get('category')
-    location = request.GET.get('location')
+        if title:
+            ads = ads.filter(title__icontains=title)
+        # if category:
+        #     ads = ads.filter(category=category)
+        if location:
+            ads = ads.filter(location=location)
+        if price_min is not None and price_max is not None:
+            ads = ads.filter(price__range=(price_min, price_max))
+        elif price_min is not None:
+            ads = ads.filter(price__gte=price_min)
+        elif price_max is not None:
+            ads = ads.filter(price__lte=price_max)
 
-    if from_price and to_price:
-        ads = ads.filter(price__range=(from_price, to_price))
-    elif from_price:
-        ads = ads.filter(price__gte=from_price)
-    elif to_price:
-        ads = ads.filter(price__lte=to_price)
-
-    if category:
-        ads = ads.filter(category=category)
-
-    if location:
-        ads = ads.filter(location=location)
-
+    # Добавьте вызов метода order_by() для сортировки объявлений по возрастанию цены
     ads = ads.order_by('price')
-
-    context = {
-        'ads': ads
-    }
-    return render(request, 'main/index.html', context)
+    # from_price = request.GET.get('from')
+    # to_price = request.GET.get('to')
+    # category = request.GET.get('category')
+    # location = request.GET.get('location')
+    # search = request.GET.get('search')  # Добавляем получение запроса 'search'
+    #
+    # if from_price and to_price:
+    #     ads = ads.filter(price__range=(from_price, to_price))
+    # elif from_price:
+    #     ads = ads.filter(price__gte=from_price)
+    # elif to_price:
+    #     ads = ads.filter(price__lte=to_price)
+    #
+    # if category:
+    #     ads = ads.filter(category=category)
+    #
+    # if location:
+    #     ads = ads.filter(location=location)
+    #
+    # if search:  # Если есть запрос 'search'
+    #     ads = ads.filter(title__icontains=search)  # Фильтруем объявления по названию
+    #
+    # ads = ads.order_by('price')
+    #
+    # context = {
+    #     'ads': ads
+    # }
+    return render(request, 'main/index.html', {'ads': ads, 'filter_form': filter_form})
 
 
 def logout(request):

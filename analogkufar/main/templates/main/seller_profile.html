@@ -29,6 +29,10 @@
     <div class="profile-right">
         <h1>{{ profile.user.username }}</h1>
         <p>{{ profile.bio }}</p>
+
+    </div>
+    <div>
+        <a class="no-underline buttonprof" href="{% url 'compose_message' user_id=profile.user.id %}">чат</a></li>
     </div>
 </div>
 

@@ -23,7 +23,8 @@
     {{ ad.title }}<br>
     {% endif %}
 
-    <a class="no-underline buttonprof" href="{% url 'user_list' user_id=ad.user.id %}">Написать продавцу</a>
+    <a class="no-underline buttonprof" href="{% url 'compose_message' user_id=ad.user.id %}">Написать продавцу</a>
+
 
     <a class="no-underline buttonprof" href="{% url 'seller_profile' user_id=ad.user.id %}">Профиль продавца</a>
 

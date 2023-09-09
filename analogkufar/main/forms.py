@@ -96,6 +96,9 @@ class AdFilterForm(forms.Form):
     location = forms.ChoiceField(label='Регион', choices=Ad.LOCATION_CHOICES, required=False)
 
 
+class MainFilter(forms.Form):
+    title = forms.CharField(label='Поиск по названию', required=False)
+
 class MessageFormEmail(forms.ModelForm):
     class Meta:
         model = MessageEmail
