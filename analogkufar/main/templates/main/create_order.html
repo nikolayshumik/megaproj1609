@@ -8,7 +8,7 @@
   <form method="POST" action="{% url 'create_order' %}">
        {% csrf_token %}
        <input type="email" name="email" placeholder="Email" required>
-       <button type="submit">Create Order</button>
+       <button class="buttonMod">Create Order</button>
    </form>
 </body>
 </html>

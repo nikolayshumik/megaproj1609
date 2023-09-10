@@ -8,7 +8,7 @@
 <form action="{% url 'contact' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Отправить</button>
+    <button class="buttonMod">Отправить</button>
 </form>
 
 </body>

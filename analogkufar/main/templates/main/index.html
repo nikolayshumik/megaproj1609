@@ -21,11 +21,22 @@
         </div>
         {% if user.is_authenticated %}
         <div class="buttons">
-            <a href="{% url 'postads' %}" class="buttonMod">Подать объявление</a>
-            <a href="{% url 'basket' %}" class="buttonMod">Корзина</a>
-            <a href="{% url 'home' %}" class="buttonMod">Главная</a>
+            <a href="{% url 'postads' %}" class="buttonMod">+ Подать объявление </a>
 
-            <a href="#" class="buttonMod" id="openModal">Профиль</a>
+            <a href="{% url 'home' %}" class="buttonMod">Главная</a>
+            <div class="buttonModbaskett">
+                <a href="{% url 'basket' %}" class="buttonModbasket">
+                    <img src="{% static 'assets/basket.png' %}" alt="Корзина">
+                </a>
+
+            </div>
+               <div class="buttonModbaskett">
+                <a href="#" id="openModal" class="buttonModbasket">
+                    <img src="{% static 'assets/pr2.png' %}" alt="Профиль">
+                </a>
+            </div>
+
+
             <script src="/static/main/js/main.js"></script>
             <div class="modal" id="myModal">
                 <div class="modal-content">
@@ -88,7 +99,7 @@
     </div>
     <div class="ad-container">
         {% for ad in ads %}
-        <div class="ad-item">
+        <div class="ad-item" onclick="redirectToDetails('{{ ad.id }}')">
             <form action="{% url 'basket' %}" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="ad_id" value="{{ ad.id }}">
@@ -96,18 +107,9 @@
                 <div class="ad-description">
                     <p><strong>Price:</strong> {{ ad.price }}</p>
                     <h3>{{ ad.title }}</h3>
-                    <button type="submit">в корзину</button>
-            </form>
-            <form action="{% url 'details' %}" method="get" class="details-form">
-                {% csrf_token %}
-                <input type="hidden" name="ad_id" value="{{ ad.id }}">
-                <button  class="buttonMod">Посмотреть детали</button>
-            </form>
 
-            <form method="get" action="{% url 'buy' %}">
-                {% csrf_token %}
-                <input type="hidden" name="ad_id" value="{{ ad.id }}">  <!-- передаем ID объявления в форме -->
-                <button class="buttonMod">Купить</button>
+
+                    <button class="buttonMod">в корзину</button>
             </form>
 
         </div>

@@ -12,7 +12,8 @@
         width: 13%;
         background-color: white;
         padding: 1rem;
-        border: 1px solid #ccc;
+        border: 1px solid #c5d3e0;
+        border-radius: 8px;
         z-index: 10;
     }
 
@@ -41,7 +42,7 @@
     <h3>Фильтры</h3>
     <form method="get" action="">
         {{ filter_form.as_p }}
-        <button type="submit" class="btn btn-primary">Фильтровать</button>
+        <button class="buttonMod"">Фильтровать</button>
     </form>
 
 </div>
@@ -59,14 +60,14 @@
                 <form action="{% url 'basket' %}" method="post" style="margin-right: 1rem;">
                     {% csrf_token %}
                     <input type="hidden" name="ad_id" value="{{ ad.id }}">
-                    <button type="submit">в корзину</button>
+                    <button class="buttonMod">в корзину</button>
                 </form>
                 <form action="{% url 'details' %}" method="get" class="details-form" style="margin-right: 1rem;">
                     {% csrf_token %}
                     <input type="hidden" name="ad_id" value="{{ ad.id }}">
-                    <button type="submit" class="details-button">Посмотреть детали</button>
+                    <button class="buttonMod">Посмотреть детали</button>
                 </form>
-                <button type="button" class="buy-button">Купить</button>
+                <button class="buttonMod">Купить</button>
             </div>
         </div>
         <img class="ad-imageseller" src="{{ ad.photo.url }}" alt="Ad Image"

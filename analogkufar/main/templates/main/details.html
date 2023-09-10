@@ -16,6 +16,18 @@
     <p class="field">Местоположение: {{ ad.location }}</p>
     <p class="field">Телефонный номер: {{ ad.phone_number }}</p>
     {% endif %}
+    <form action="{% url 'details' %}" method="get" class="details-form">
+                {% csrf_token %}
+                <input type="hidden" name="ad_id" value="{{ ad.id }}">
+                <button  class="buttonMod">Посмотреть детали</button>
+            </form>
+
+            <form method="get" action="{% url 'buy' %}">
+                {% csrf_token %}
+                <input type="hidden" name="ad_id" value="{{ ad.id }}">  <!-- передаем ID объявления в форме -->
+                <button class="buttonMod">Купить</button>
+            </form>
+
 </div>
 <div class="profinfo">
     {% if ad %}
@@ -23,10 +35,10 @@
     {{ ad.title }}<br>
     {% endif %}
 
-    <a class="no-underline buttonprof" href="{% url 'compose_message' user_id=ad.user.id %}">Написать продавцу</a>
+    <a class="buttonMod" href="{% url 'compose_message' user_id=ad.user.id %}">Написать продавцу</a>
 
 
-    <a class="no-underline buttonprof" href="{% url 'seller_profile' user_id=ad.user.id %}">Профиль продавца</a>
+    <a class="buttonMod" href="{% url 'seller_profile' user_id=ad.user.id %}">Профиль продавца</a>
 
 </div>
 
@@ -45,15 +57,15 @@
                 <div class="ad-description">
                     <p><strong>Price:</strong> {{ other.price }}</p>
                     <h3>{{ other.title }}</h3>
-                    <button type="submit">в корзину</button>
+                    <button class="buttonMod">в корзину</button>
 
             </form>
             <form action="{% url 'details' %}" method="get" class="details-form">
                 {% csrf_token %}
                 <input type="hidden" name="ad_id" value="{{ other.id }}">
-                <button type="submit" class="details-button">Посмотреть детали</button>
+                <button class="buttonMod">Посмотреть детали</button>
             </form>
-            <button type="button" class="buy-button">Купить</button>
+            <button class="buttonMod">Купить</button>
         </div>
     </div>
     {% endif %}

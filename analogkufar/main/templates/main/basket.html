@@ -32,19 +32,19 @@
                 <form method="get" action="{% url 'buy' %}">
                     {% csrf_token %}
                     <input type="hidden" name="ad_id" value="{{ ad.id }}">  <!-- передаем ID объявления в форме -->
-                    <button type="submit" class="buy-button">Купить</button>
+                    <button class="buttonMod">Купить</button>
                 </form>
                 <!--          </form>-->
                 <form action="{% url 'details' %}" method="get" class="details-form">
                     {% csrf_token %}
                     <input type="hidden" name="ad_id" value="{{ ad.id }}">
-                    <button type="submit" class="details-button">Посмотреть детали</button>
+                    <button class="buttonMod">Посмотреть детали</button>
                 </form>
                 <form action="{% url 'delete_from_basket' %}" method="post" class="delete-form"
                       data-ad-id="{{ ad.id }}">
                     {% csrf_token %}
                     <input type="hidden" name="ad_id" value="{{ ad.id }}">
-                    <button class="delete-button">Удалить из корзины</button>
+                    <button class="buttonMod">Удалить из корзины</button>
                 </form>
             </div>
         </div>
