@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 from django.contrib.auth import login
@@ -11,7 +11,7 @@ from django.http import HttpResponseNotAllowed
 from django.contrib.auth.models import User
 from .forms import ProfileForm
 from .models import Profile
-from .forms import AdFilterForm
+from .forms import AdFilterForm, TitleSearchForm
 from .models import Purchase
 from django.conf import settings
 from django.views.generic import CreateView
@@ -31,6 +31,9 @@ from .forms import MessageForm
 from django.core.mail import send_mail
 
 from .forms import MessageFormEmail
+
+
+
 
 
 def compose_message(request, user_id):
@@ -66,6 +69,7 @@ def user_list(request, user_id):
 
     return render(request, 'main/user_list.html', {'users': users, 'profile': profile, 'ads': ads})
 
+
 def seller_profile(request, user_id):
     profile = get_object_or_404(Profile, user_id=user_id)
     ads = Ad.objects.filter(user_id=user_id)
@@ -96,6 +100,8 @@ def seller_profile(request, user_id):
     ads = ads.order_by('price')
 
     return render(request, 'main/seller_profile.html', {'profile': profile, 'ads': ads, 'filter_form': filter_form})
+
+
 # def seller_profile(request, user_id):
 #     profile = get_object_or_404(Profile, user_id=user_id)
 #     ads = Ad.objects.filter(user_id=user_id) # Добавьте эту строку
@@ -122,7 +128,6 @@ def order_confirmation(request):
     return render(request, 'main/order_confirmation.html')
 
 
-
 class ContactView(CreateView):
     model = Contact
     form_class = ContactForm
@@ -133,6 +138,7 @@ class ContactView(CreateView):
         form.save()
         send(form.instance.email)
         return super().form_valid(form)
+
 
 def delete_from_basket(request):
     if request.method == 'POST':
@@ -152,6 +158,8 @@ def details(request):
         ad = Ad.objects.get(id=ad_id)  # Получаем объявление по id
 
     return render(request, 'main/details.html', {'ad': ad, 'ads': ads})
+
+
 # def details(request):
 #     ads = Ad.objects.all()
 #     ad_id = request.GET.get('ad_id')  # Получаем id объявления из параметра GET-запроса
@@ -176,8 +184,8 @@ def register_view(request):
 
 def index(request):
     ads = Ad.objects.all()
-    filter_form = AdFilterForm(
-        request.GET)  # Создайте экземпляр формы, используйте переданные GET-параметры для фильтрации (если есть)
+    title_search_form = TitleSearchForm(request.GET)
+    filter_form = AdFilterForm(request.GET)  # Создайте экземпляр формы, используйте переданные GET-параметры для фильтрации (если есть)
     if filter_form.is_valid():
         title = filter_form.cleaned_data.get('title')
         # category = filter_form.cleaned_data.get('category')
@@ -198,40 +206,19 @@ def index(request):
         elif price_max is not None:
             ads = ads.filter(price__lte=price_max)
 
+    if title_search_form.is_valid():
+        simple_title = title_search_form.cleaned_data.get('simple_title')
+        if simple_title:
+            ads = ads.filter(title__icontains=simple_title)
+
     # Добавьте вызов метода order_by() для сортировки объявлений по возрастанию цены
     ads = ads.order_by('price')
-    # from_price = request.GET.get('from')
-    # to_price = request.GET.get('to')
-    # category = request.GET.get('category')
-    # location = request.GET.get('location')
-    # search = request.GET.get('search')  # Добавляем получение запроса 'search'
-    #
-    # if from_price and to_price:
-    #     ads = ads.filter(price__range=(from_price, to_price))
-    # elif from_price:
-    #     ads = ads.filter(price__gte=from_price)
-    # elif to_price:
-    #     ads = ads.filter(price__lte=to_price)
-    #
-    # if category:
-    #     ads = ads.filter(category=category)
-    #
-    # if location:
-    #     ads = ads.filter(location=location)
-    #
-    # if search:  # Если есть запрос 'search'
-    #     ads = ads.filter(title__icontains=search)  # Фильтруем объявления по названию
-    #
-    # ads = ads.order_by('price')
-    #
-    # context = {
-    #     'ads': ads
-    # }
-    return render(request, 'main/index.html', {'ads': ads, 'filter_form': filter_form})
+    return render(request, 'main/index.html', {'ads': ads, 'filter_form': filter_form, 'title_search_form': title_search_form})
 
 
 def logout(request):
     return render(request, 'main/logout.html')
+
 
 def test(request):
     return render(request, 'main/test.html')
@@ -263,7 +250,10 @@ def basket(request):
             total_quantity += item.quantity
             total_price += item.ad.price * item.quantity
 
-        return render(request, 'main/basket.html', {'ads': ads, 'total_quantity': total_quantity, 'total_price': total_price})
+        return render(request, 'main/basket.html',
+                      {'ads': ads, 'total_quantity': total_quantity, 'total_price': total_price})
+
+
 @login_required
 def postads(request):
     if request.method == 'POST':
@@ -274,6 +264,8 @@ def postads(request):
     else:
         form = AdForm(request=request)  # Pass the request object to the form
     return render(request, 'main/postads.html', {'form': form})
+
+
 # def postads(request):
 #
 #     if request.method == 'POST':
@@ -298,6 +290,7 @@ def profile(request):
 
     return render(request, 'main/profile.html', context)
 
+
 @login_required
 def edit_profile(request):
     user = request.user
@@ -316,6 +309,7 @@ def edit_profile(request):
 
     return render(request, 'main/edit_profile.html', {'form': form, 'profile': profile})
 
+
 @login_required
 def profiles(request):
     return render(request, 'main/profiles.html')
@@ -327,12 +321,15 @@ def myads(request):
     equal_ad_id = int(ad_id) if ad_id else None
     return render(request, 'main/myads.html', {'ads': ads, 'equal_ad_id': equal_ad_id})
 
+
 def ad_details(request, ad_id):
     ad = Ad.objects.get(id=ad_id)
     return render(request, 'main/myads.html', {'ads': Ad.objects.all(), 'equal_ad_id': ad_id})
 
+
 def celery(request):
     return render(request, 'main/hometusk.html')
+
 
 def edit_ad(request, ad_id):
     ad = Ad.objects.get(id=ad_id)
@@ -364,12 +361,16 @@ def buy(request):
         ad = Ad.objects.get(id=ad_id)  # Получаем объявление по id
 
     return render(request, 'main/buy.html', {'ad': ad, 'ads': ads})
+
+
 def send_email(request):
     subject = "AnalogKufar"
     message = "Ваш заказ принят ."
     from_email = settings.EMAIL_HOST_USER
     recipient_list = ['nikolayshumik@gmail.com']
     send_mail(subject, message, from_email, recipient_list)
+
+
 def submit_order(request):
     if request.method == 'POST':
         # Обработка данных заказа
@@ -395,11 +396,10 @@ def submit_order(request):
         elif payment_method == 'online_payment':
             return HttpResponseRedirect(reverse('online_payment'))
 
-
         return redirect('order_confirmation')
 
-
     return render(request, 'main/buy.html')
+
 
 def online_payment(request):
     # Логика онлайн-оплаты и рендеринг шаблона

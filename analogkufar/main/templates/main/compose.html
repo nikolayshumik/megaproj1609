@@ -1,7 +1,21 @@
 {% extends "main/index.html" %}
 
 {% block content %}
+<script>
+  function scrollToBottom() {
+    const messageContainer = document.querySelector('.message-container');
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+  }
 
+</script>
+<!--  document.addEventListener('DOMContentLoaded', scrollToBottom);-->
+<!--    function refreshPage() {-->
+<!--    setTimeout(function() {-->
+<!--      location.reload();-->
+<!--    }, 5000);-->
+<!--  }-->
+
+<!--  document.addEventListener('DOMContentLoaded', refreshPage);-->
  <div class="container">
   <div class="message-container">
     {% for message in messages %}

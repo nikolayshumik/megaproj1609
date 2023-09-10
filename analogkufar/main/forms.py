@@ -95,6 +95,8 @@ class AdFilterForm(forms.Form):
     price_max = forms.DecimalField(label='Максимальная цена', required=False)
     location = forms.ChoiceField(label='Регион', choices=Ad.LOCATION_CHOICES, required=False)
 
+class TitleSearchForm(forms.Form):
+    simple_title = forms.CharField(label='Поиск ', required=False)
 
 class MainFilter(forms.Form):
     title = forms.CharField(label='Поиск по названию', required=False)

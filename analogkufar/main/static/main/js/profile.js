@@ -59,3 +59,4 @@ const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
 
         document.getElementById("cart-items").appendChild(cartItem);
     }
+

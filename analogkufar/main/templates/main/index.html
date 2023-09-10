@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,26 +9,44 @@
 </head>
 <body>
 <div class="header">
-    <div class="logo">Логотип</div>
+    <!--    <div class="image-container">-->
+    <!--        <img src="assets/logo3.jpg" alt="">-->
+    <!--    </div>-->
     <div class="navigation">
-       <div class="search-container">
-    <input type="text" name="search" class="search-input" placeholder="Поиск товара">
-    <button class="search-button">Найти</button>
-</div>
+        <div class="search-container">
+            <form method="get">
+                {{ title_search_form.as_p }}
+                <!--                <button class="search-button">Найти</button>-->
+            </form>
+        </div>
         {% if user.is_authenticated %}
         <div class="buttons">
-            <a href="{% url 'postads' %}" class="button">Подать объявление</a>
-            <a href="{% url 'basket' %}" class="button">Корзина</a>
-            <a href="{% url 'home' %}" class="button">Главная</a>
-            <!--        <a href="{% url 'logout' %}" class="button">Выйти</a>-->
-            <a href="{% url 'profile' %}" class="button">Профиль</a>
+            <a href="{% url 'postads' %}" class="buttonMod">Подать объявление</a>
+            <a href="{% url 'basket' %}" class="buttonMod">Корзина</a>
+            <a href="{% url 'home' %}" class="buttonMod">Главная</a>
+
+            <a href="#" class="buttonMod" id="openModal">Профиль</a>
+            <script src="/static/main/js/main.js"></script>
+            <div class="modal" id="myModal">
+                <div class="modal-content">
+                    <!-- Здесь разместите содержимое вашего модального окна -->
+                    <ul>
+                        <li><a href="#">Мои чаты</a></li>
+                        <li><a href="{% url 'myads' %}">Мои объявления</a></li>
+                        <li><a href="{% url 'profile' %}">Профиль</a></li>
+                        <li><a href="{% url 'logout' %}?next=/">Выйти</a></li>
+                    </ul>
+                    <!-- Дополнительные элементы и текст -->
+                </div>
+            </div>
+
 
         </div>
         {% else %}
-        <a href="{% url 'postads' %}" class="button">Подать объявление</a>
-        <a href="{% url 'basket' %}" class="button">Корзина</a>
-        <a href="{% url 'home' %}" class="button">Главная</a>
-        <a href="{% url 'register' %}" class="button">Войти</a>
+        <a href="{% url 'postads' %}" class="buttonMod">Подать объявление</a>
+        <a href="{% url 'basket' %}" class="buttonMod">Корзина</a>
+        <a href="{% url 'home' %}" class="buttonMod">Главная</a>
+        <a href="{% url 'register' %}" class="buttonMod">Войти</a>
 
 
         {% endif %}
@@ -36,35 +56,35 @@
 <div class="content">
     {% block content %}
     <div class="filterindex">
-         <h3>Фильтры</h3>
-    <form method="get" action="">
-        {{ filter_form.as_p }}
-        <button type="submit" class="btn btn-primary">Фильтровать</button>
-    </form>
-<!--        <form action="{% url 'home' %}" method="get">-->
-<!--            <label for="from">Цена:</label><br>-->
-<!--            <input type="number" name="from" placeholder="От">-->
-<!--            <input type="number" name="to" placeholder="До"><br>-->
+        <h3>Фильтры</h3>
+        <form method="get" action="">
+            {{ filter_form.as_p }}
+            <button class="buttonMod">Фильтровать</button>
+        </form>
+        <!--        <form action="{% url 'home' %}" method="get">-->
+        <!--            <label for="from">Цена:</label><br>-->
+        <!--            <input type="number" name="from" placeholder="От">-->
+        <!--            <input type="number" name="to" placeholder="До"><br>-->
 
-<!--            <label for="category">Категория:</label>-->
-<!--            <select name="category">-->
-<!--                <option value="">Все категории</option>-->
-<!--                <option value="обувь">Обувь</option>-->
-<!--                <option value="одежда">Одежда</option>-->
-<!--                <option value="развлечения">Развлечения</option>-->
-<!--                &lt;!&ndash; Add more category options &ndash;&gt;-->
-<!--            </select><br>-->
+        <!--            <label for="category">Категория:</label>-->
+        <!--            <select name="category">-->
+        <!--                <option value="">Все категории</option>-->
+        <!--                <option value="обувь">Обувь</option>-->
+        <!--                <option value="одежда">Одежда</option>-->
+        <!--                <option value="развлечения">Развлечения</option>-->
+        <!--                &lt;!&ndash; Add more category options &ndash;&gt;-->
+        <!--            </select><br>-->
 
-<!--            <label for="location">Локация:</label>-->
-<!--            <select name="location">-->
-<!--                <option value="">Все локации</option>-->
-<!--                <option value="MT">Минская область</option>-->
-<!--                <option value="BR">Брестская область</option>-->
-<!--                &lt;!&ndash; Add more location options &ndash;&gt;-->
-<!--            </select><br>-->
+        <!--            <label for="location">Локация:</label>-->
+        <!--            <select name="location">-->
+        <!--                <option value="">Все локации</option>-->
+        <!--                <option value="MT">Минская область</option>-->
+        <!--                <option value="BR">Брестская область</option>-->
+        <!--                &lt;!&ndash; Add more location options &ndash;&gt;-->
+        <!--            </select><br>-->
 
-<!--            <button type="submit">Сортировать и фильтровать</button>-->
-<!--        </form>-->
+        <!--            <button type="submit">Сортировать и фильтровать</button>-->
+        <!--        </form>-->
     </div>
     <div class="ad-container">
         {% for ad in ads %}
@@ -81,13 +101,13 @@
             <form action="{% url 'details' %}" method="get" class="details-form">
                 {% csrf_token %}
                 <input type="hidden" name="ad_id" value="{{ ad.id }}">
-                <button type="submit" class="details-button">Посмотреть детали</button>
+                <button  class="buttonMod">Посмотреть детали</button>
             </form>
 
             <form method="get" action="{% url 'buy' %}">
                 {% csrf_token %}
                 <input type="hidden" name="ad_id" value="{{ ad.id }}">  <!-- передаем ID объявления в форме -->
-                <button type="submit" class="buy-button">Купить</button>
+                <button class="buttonMod">Купить</button>
             </form>
 
         </div>
@@ -105,4 +125,5 @@
 </footer>
 <script src="/static/main/js/profile.js"></script>
 </body>
+
 </html>
