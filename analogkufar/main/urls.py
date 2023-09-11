@@ -34,5 +34,7 @@ urlpatterns = [
                   path('order_confirmation/', views.order_confirmation, name='order_confirmation'),
                   path('online_payment/', views.online_payment, name='online_payment'),
                   path('user-list/<int:user_id>/', views.user_list, name='user_list'),
+                  path('support/', views.support, name='support'),
+                  path('email_sent/', views.email_sent, name='email_sent'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

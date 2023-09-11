@@ -14,36 +14,38 @@ form {
 form p {
     margin-bottom: 10px;
     width: 100%;
+    border-bottom: 1px solid #c5d3e0;
 }
 
-.label, .button {
-    display: inline-block;
-    margin: 5px 0;
+.input{
+width: 140px;
 }
 
-.button {
-    text-decoration: none;
-    background-color: black;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-    border: 1px solid black;
+.registerdiv{
+ display: flex;
+  flex-direction: column; /* Можно использовать row, если необходимо */
+  justify-content: center;
+border-radius: 5px;
+border: 1px solid #4c6887;
+width: 700px;
+margin-left: 30%;
+}
+.btnaccent{
+margin-left: 40%;
+margin-top: 1%;
+
 }
 
-.button:hover {
-    background-color: white;
-}
 </style>
-<div class="container">
+<div class="registerdiv">
     <h2>Регистрация</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="button" type="submit">Зарегистрироваться</button>
+        <button class="buttonMod">Зарегистрироваться</button>
     </form>
 
-    <a href="{% url 'login' %}" class="button">Уже есть аккаунт?</a> or <a class="button"
-                                                                           href="{% url 'login' %}">Войти</a>
+
 </div>
+ <div class="btnaccent"><a href="{% url 'login' %}" class="buttonMod">Уже есть аккаунт?</a> or <a class="buttonMod" href="{% url 'login' %}">Войти</a></div>
 {% endblock %}

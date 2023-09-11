@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function redirectToDetails(adId) {
     var detailsForm = document.createElement('form');
-    detailsForm.action = "/details/";  // Update this with the correct URL path to the details view
+    detailsForm.action = "/details/";  // Замените это на правильный URL путь к представлению деталей
     detailsForm.method = "get";
     detailsForm.className = "details-form";
     detailsForm.innerHTML = `
@@ -25,6 +25,10 @@ function redirectToDetails(adId) {
 `;
     document.body.appendChild(detailsForm);
     detailsForm.submit();
+
+    // Добавляем стиль CSS для изменения курсора
+    var div = document.querySelector("div"); // Выбираете нужный div или измените селектор на ваш выбор
+    div.style.cursor = "pointer";
 }
 
 

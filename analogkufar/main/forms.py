@@ -101,12 +101,12 @@ class TitleSearchForm(forms.Form):
 class MainFilter(forms.Form):
     title = forms.CharField(label='Поиск по названию', required=False)
 
-class MessageFormEmail(forms.ModelForm):
-    class Meta:
-        model = MessageEmail
-        fields = ('name', 'email', 'message')
+class MessageFormEmail(forms.Form):
+    name = forms.CharField(max_length=100, label="Как к Вам обращаться")
+    email = forms.EmailField(label="Ваша почта")
+    message = forms.CharField(widget=forms.Textarea, label="Опишите проблему")
 
-    def send_email(self):
+    def send_email_support(self):
         name = self.cleaned_data['name']
         email = self.cleaned_data['email']
         message = self.cleaned_data['message']
@@ -118,3 +118,5 @@ class MessageFormEmail(forms.ModelForm):
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
+
+

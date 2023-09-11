@@ -55,12 +55,13 @@
         {% if equal_ad_id == ad.id %}
         <div class="myadsdiv">
             <img src="{{ ad.photo.url }}" alt="Ad Photo" class="detailphoto">
-            <h1 class="field">{{ ad.title }}</h1>
+            <div class="myadsdivin"><h1 class="field">{{ ad.title }}</h1>
             <p class="field">Категория: {{ ad.category }}</p>
             <p class="field">Описание:{{ ad.description }}</p>
             <p class="field">Цена: {{ ad.price }}</p>
             <p class="field">Местоположение: {{ ad.location }}</p>
             <p class="field">Телефонный номер: {{ ad.phone_number }}</p>
+                </div>
             <div class="reddel">
                 <div class="red">
                     <a href="{% url 'edit_ad' ad.id %}" class="buttonMod">Редактировать</a>
@@ -68,7 +69,7 @@
                 <div class="del">
                     <form method="POST" action="{% url 'delete_ad' ad.id %}">
                         {% csrf_token %}
-                        <button class="buttonMod">Удалить объявление</button>
+                        <button class="buttonModbutton">Удалить объявление</button>
                     </form>
                 </div>
             </div>

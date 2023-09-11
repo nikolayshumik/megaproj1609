@@ -23,7 +23,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Order
 from .tasks import send_order_confirmation_email
-
+from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from .models import Message
@@ -367,7 +367,7 @@ def send_email(request):
     subject = "AnalogKufar"
     message = "Ваш заказ принят ."
     from_email = settings.EMAIL_HOST_USER
-    recipient_list = ['nikolayshumik@gmail.com']
+    recipient_list = ['testdjangosmeta@mail.ru']
     send_mail(subject, message, from_email, recipient_list)
 
 
@@ -404,3 +404,18 @@ def submit_order(request):
 def online_payment(request):
     # Логика онлайн-оплаты и рендеринг шаблона
     return render(request, 'main/online_payment.html')
+
+
+def support(request):
+    if request.method == 'POST':
+        form = MessageFormEmail(request.POST)  # Use MessageFormEmail instead of MessageForm
+        if form.is_valid():
+            form.send_email_support()
+            return render(request, 'main/email_sent.html')
+    else:
+        form = MessageFormEmail()  # Use MessageFormEmail instead of MessageForm
+
+    return render(request, 'main/support.html', {'form': form})
+
+def email_sent(request):
+    return render(request, 'main/email_sent.html')
