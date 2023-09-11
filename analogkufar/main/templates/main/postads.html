@@ -3,15 +3,24 @@
 {% block title %}О нас{% endblock %}
 
 {% block content %}
+<style>
+  .custom-file-input::before {
+    background-color: yellow;
+    /* Add any additional styling here */
+  }
+  .imput#file-upload-button{
+  background: black;
+  }
+</style>
 <div style="text-align: center;">
     <p>Подача обьявлений...</p>
 </div>
 <div class="form-wrapper">
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-      <div class="form-group-phot">
-      <label class="label" for="{{ form.photo.id_for_label }}">Фотографии:</label>
-      {{ form.photo }}
+      <div class="form-group">
+        <label class="label" for="{{ form.photo.id_for_label }}">Фотографии:</label>
+        {{ form.photo }}
     </div>
     <div class="form-group">
       <label class="label" for="{{ form.title.id_for_label }}">Название товара:</label>

@@ -28,7 +28,8 @@
     .wrapper {
       width: 400px;
       margin: 30px auto;
-      border: 1px solid #000;
+      border: 1px solid #4c6887;
+      border-radius: 12px;
       background-color: #fff;
       padding: 20px;
     }
@@ -49,42 +50,39 @@
     }
 
     .form-field {
-      background-color: #f1f1f1;
+      background-color: #f9fdff;
+      border: 1px solid #4c6887;
+      border-radius: 5px;
       display: flex;
       align-items: center;
       margin-bottom: 10px;
       padding: 10px;
-      border: 1px solid #000;
+
     }
 
     .form-field input {
-      flex: 1;
-      border: none;
-      background-color: transparent;
-      outline: none;
+      border: 1px solid #4c6887;
+      border-radius: 5px;
     }
 
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      font-size: 18px;
-      background-color: #000;
-      color: #fff;
-      text-align: center;
-      text-decoration: none;
-      border: 1px solid black;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button.btn:active {
-      transform: translateY(2px);
-    }
-    button:hover {
-  background-color: white;
-  color: black;
+   .buttonMod {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #789cc3;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
 }
+.buttonMod:hover {
+    background-color: #4c6887;
+}
+   .buttonMod.login {
+  margin-left: 41%;
+  margin-top: 10px;
+}
+
+
     a {
     margin-top: 10px;
       color: #000;
@@ -124,10 +122,10 @@
             <input type="password" name="password" id="pwd" placeholder="Password">
         </div>
         {{ form.errors }}
-        <button class="btn mt-3">Login</button>
+        <button class="buttonMod login">Login</button>
     </form>
     <div class="additional-links">
-        <a href="{% url 'register' %}">Forget password?</a> or <a href="{% url 'register' %}">Sign up</a>
+        <a class="buttonMod" href="{% url 'register' %}">Forget password?</a> or <a class="buttonMod" href="{% url 'register' %}">Sign up</a>
     </div>
     <div class="text-center fs-6">
 

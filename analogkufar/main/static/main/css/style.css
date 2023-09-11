@@ -106,7 +106,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #c5d3e0;
+  border: 1px solid #4c6887;
   border-radius: 8px;
   width: 600px;
   margin-left: 34%;
@@ -169,7 +169,7 @@ footer {
             width: 100%;
             height: 80px;
             background-color: white;
-            border-bottom: 1px solid #c5d3e0;
+            border-bottom: 2px solid #c5d3e0;
             border-top: 1px solid #c5d3e0;
             display: flex;
             justify-content: center;
@@ -209,7 +209,7 @@ p {
     .ad-item {
         flex-basis: calc(25% - 30px);
         margin: 10px;
-        border: 3px solid #c5d3e0;
+        border: 1px solid #4c6887;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -247,7 +247,7 @@ p {
 .basket-content {
   display: flex;
   align-items: flex-start;
-  border: 1px solid #ccc;
+  border: 1px solid #4c6887;
   border-radius: 6px;
   padding: 10px;
   margin-left: 27%;
@@ -695,7 +695,10 @@ button1[type="submit"] {
 .buttonMod.chat {
   margin-right: 30px;
 }
-
+.buttonMod.register{
+margin-top: 10px;
+margin-bottom: 20px;
+}
 .buttonMo{
 border: 1px solid white;
 border-radius: 5px;
@@ -749,3 +752,12 @@ ul li a:hover {
         border: 1px solid #4c6887;
         margin-top: 8px;
     }
+
+
+ /* Подача обьявлений */
+.form-controlph{
+        border-radius: 5px;
+        border: 1px solid #4c6887;
+        background-color: white;
+}
+

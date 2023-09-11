@@ -24,6 +24,8 @@ class CustomUserCreationForm(UserCreationForm):
     phone_number = forms.CharField(max_length=30, required=True, label='Номер телефона')
     password1 = forms.CharField(max_length=30, widget=forms.PasswordInput, label='Пароль')
     password2 = forms.CharField(max_length=30, widget=forms.PasswordInput, label='Повторите пароль')
+    username = forms.CharField(max_length=30, required=True, label='Имя пользователя',
+                               widget=forms.TextInput(attrs={'class': 'register-input'}))
 
     def save(self, commit=True):
         user = super(CustomUserCreationForm, self).save(commit=False)
@@ -54,7 +56,7 @@ class AdForm(forms.ModelForm):
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
             'location': forms.Select(attrs={'class': 'form-select'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'photo': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'photo': forms.ClearableFileInput(attrs={'class': 'form-controlph'}),
         }
 
     def __init__(self, *args, **kwargs):
