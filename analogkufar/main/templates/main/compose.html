@@ -1,6 +1,21 @@
 {% extends "main/index.html" %}
 
 {% block content %}
+<style>
+  .messaebtn {
+    display: flex; /* применяем flexbox для контейнера */
+    align-items: center; /* выравниваем элементы по вертикали */
+  }
+
+  .textarea1 {
+    flex: 1; /* устанавливаем растяжимую ширину для textarea */
+  }
+
+  .buttonMod.mes {
+    margin-left: 20px; /* задаем отступ слева для кнопки */
+    margin-top: 6px;
+  }
+</style>
 <script>
   function scrollToBottom() {
     const messageContainer = document.querySelector('.message-container');
@@ -16,6 +31,20 @@
 <!--  }-->
 
 <!--  document.addEventListener('DOMContentLoaded', refreshPage);-->
+
+<div class="profile-block">
+    <div class="profile-left">
+        {% if recipient_profile.photo %}
+            <img src="{{ recipient_profile.photo.url }}" alt="Profile Photo" class="profilephoto">
+        {% endif %}
+    </div>
+    <div class="profile-right">
+        <h1>{{ recipient_profile.user.username }}</h1>
+        <p>{{ recipient_profile.bio }}</p>
+    </div>
+</div>
+
+
  <div class="container">
   <div class="message-container">
     {% for message in messages %}
@@ -27,8 +56,10 @@
 
   <form class="form1" method="post">
     {% csrf_token %}
+<div class="messaebtn">
     <textarea class="textarea1" name="content"></textarea>
-    <button class="button1" type="submit">Send</button>
+    <button class="buttonMod mes">Send</button>
+  </div>
   </form>
 </div>
 

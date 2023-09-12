@@ -40,3 +40,17 @@ window.addEventListener('scroll', function() {
         footer.style.display = 'none';
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  var footer = document.getElementById('footer');
+
+  window.addEventListener('scroll', function() {
+    // Check if the user has scrolled to the bottom of the page
+    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+      footer.style.display = 'block';
+    } else {
+      footer.style.display = 'none';
+    }
+  });
+});

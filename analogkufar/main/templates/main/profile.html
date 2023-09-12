@@ -6,8 +6,25 @@
 {% endblock %}
 
 {% block content %}
-
-
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+    var phrases = [
+      "(Совет)\nЛюди чаще покупают и пишут тем людям, у кого полностью заполнен профиль.",
+      "(Совет)\nТовары с хорошими отзывами привлекают больше покупателей.",
+      "(Совет)\nБесплатная доставка доступна при заказе свыше 5000 рублей.",
+      "(Совет)\nПроверьте акции и скидки на главной странице для экономии.",
+      "(Совет)\nПокупая подходящий размер, обратив внимание на таблицу размеров.",
+      "(Совет)\nПрисоединяйтесь к нашей программе лояльности, чтобы получать бонусы и скидки.",
+      "(Совет)\nПодпишитесь на нашу рассылку, чтобы первыми узнавать о новых поступлениях и акциях.",
+      "(Совет)\nИспользуйте фильтры на странице категорий, чтобы быстро найти нужный товар.",
+      "(Совет)\nНе забудьте проверить отдел распродаж, чтобы найти товары по сниженным ценам.",
+      "(Совет)\nПоделитесь своим опытом! Оставьте отзыв о купленном товаре и помогите другим покупателям."
+    ];
+    var dtextElement = document.getElementById('dtext');
+    var randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+    dtextElement.innerText = randomPhrase;
+  });
+</script>
 <div class="profile-block">
     <div class="profile-left">
   {% if profile.photo %}
@@ -20,27 +37,26 @@
     </div>
     <div class="redactionbutton">
     <div class="myads"><a href="{% url 'profiles_edit' %}"class="buttonMod">Редактировать</a></div>
-        <div class="myads"><a href="{% url 'logout' %}?next=/"class="buttonMod" >Выйти</a></div>
+<!--        <div class="myads"><a href="{% url 'logout' %}?next=/"class="buttonMod" >Выйти</a></div>-->
         </div>
 </div>
-<div class="spisokadsprofile">
-  <div class="myads"><a href="{% url 'myads' %}"class="buttonMod">Мои обьявления</a></div>
-  <div class="myads">
+<div class="divtext">
+  <div id="dtext">(Совет)<br>
+    Люди чаще покупают и пишут тем людям, у кого полностью заполнен профиль.
+  </div>
+</div>
+
+
+<!--<div class="spisokadsprofile">-->
+<!--  <div class="myads"><a href="{% url 'myads' %}"class="buttonMod">Мои обьявления</a></div>-->
+<!--  <div class="myads">-->
 <!--    <a href="" class="button">-->
 <!--        Мои сообщения-->
 <!--        {% if messages.count %}-->
 <!--            ({{ messages.count }})-->
 <!--        {% endif %}-->
 <!--    </a>-->
-</div>
-<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
-<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
-<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
-<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
-<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
-<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
-<!--  <div class="myads"><a href="{% url 'myads' %}"class="button">Мои обьявления</a></div>-->
-<!--  <div class="myads"><button class="button" onclick="location.href='{% url 'logout' %}?next=/'">Выйти</button></div>-->
+<!--</div>-->
 
-</div>
+<!--</div>-->
 {% endblock %}

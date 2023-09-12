@@ -16,29 +16,31 @@
     <p class="field">Местоположение: {{ ad.location }}</p>
     <p class="field">Телефонный номер: {{ ad.phone_number }}</p>
     {% endif %}
-    <form action="{% url 'details' %}" method="get" class="details-form">
-                {% csrf_token %}
-                <input type="hidden" name="ad_id" value="{{ ad.id }}">
-                <button  class="buttonMod">Посмотреть детали</button>
-            </form>
-
+<div class="butsdetail">
+<form action="{% url 'basket' %}" method="post">
+       {% csrf_token %}
+       <input type="hidden" name="ad_id" value="{{ ad_id }}">
+       <button class="buttonMod">В корзину</button>
+   </form>
             <form method="get" action="{% url 'buy' %}">
                 {% csrf_token %}
                 <input type="hidden" name="ad_id" value="{{ ad.id }}">  <!-- передаем ID объявления в форме -->
                 <button class="buttonMod">Купить</button>
             </form>
-
+</div>
 </div>
 <div class="profinfo">
-    {% if ad %}
+   {% if ad %}
+  <div style="padding-left: 20px; padding-bottom: 10px;">
     {{ ad.price }}<br>
     {{ ad.title }}<br>
+</div>
     {% endif %}
 
-    <a class="buttonMod" href="{% url 'compose_message' user_id=ad.user.id %}">Написать продавцу</a>
+    <a class="buttonMod writesel" href="{% url 'compose_message' user_id=ad.user.id %}">Написать продавцу</a>
 
 
-    <a class="buttonMod" href="{% url 'seller_profile' user_id=ad.user.id %}">Профиль продавца</a>
+    <a class="buttonMod writesel" href="{% url 'seller_profile' user_id=ad.user.id %}">Профиль продавца</a>
 
 </div>
 
@@ -46,7 +48,7 @@
 
 
 <div class="detailsads">
-    <div class="ad-container">
+    <div class="ad-containerdetail">
         {% for other in ads %}
         {% if other.category == ad.category %}
         <div class="ad-item">

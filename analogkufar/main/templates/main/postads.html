@@ -4,21 +4,30 @@
 
 {% block content %}
 <style>
-  .custom-file-input::before {
-    background-color: yellow;
-    /* Add any additional styling here */
+  .form-controlph {
+    background-color: #789cc3; /* задаем желтый фон кнопке */
+    color: white; /* меняем цвет текста на белый */
+    padding: 10px 20px; /* настраиваем внутренние отступы кнопки */
+    border: none; /* удаляем границу кнопки */
+    cursor: pointer; /* меняем курсор при наведении на кнопку */
+    margin-top: 10px;
   }
-  .imput#file-upload-button{
-  background: black;
+
+  .form-controlph:hover {
+    background-color: #4c6887; /* задаем темно-золотой цвет фона при наведении */
+  }
+  .form-controlph::file-selector-button {
+    display: none; /* скрываем встроенную кнопку */
   }
 </style>
+
 <div style="text-align: center;">
     <p>Подача обьявлений...</p>
 </div>
 <div class="form-wrapper">
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-      <div class="form-group">
+      <div class="form-group photo">
         <label class="label" for="{{ form.photo.id_for_label }}">Фотографии:</label>
         {{ form.photo }}
     </div>

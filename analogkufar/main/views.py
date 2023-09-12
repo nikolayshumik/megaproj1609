@@ -31,13 +31,15 @@ from .forms import MessageForm
 from django.core.mail import send_mail
 
 from .forms import MessageFormEmail
-
-
+from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 
 
 
 def compose_message(request, user_id):
     recipient = get_object_or_404(User, id=user_id)
+    recipient_profile = Profile.objects.get(user=recipient)  # Получите профиль получателя сообщения
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -56,7 +58,7 @@ def compose_message(request, user_id):
         recipient__in=[request.user, recipient]
     ).order_by('created_at')
 
-    return render(request, 'main/compose.html', {'form': form, 'messages': messages, 'recipient': recipient})
+    return render(request, 'main/compose.html', {'form': form, 'messages': messages, 'recipient': recipient, 'recipient_profile': recipient_profile})
 
 
 @login_required
@@ -64,10 +66,21 @@ def user_list(request, user_id):
     profile = get_object_or_404(User, id=user_id)
     users = User.objects.exclude(id=request.user.id)
 
-    # Получаем список объявлений, созданных пользователем
+    # Get the list of users with whom the logged-in user has messages
+    users_with_messages = User.objects.filter(
+        Q(sent_messages__recipient=request.user) | Q(received_messages__sender=request.user)
+    ).distinct()
+
+    # Get the list of ads created by the profile user
     ads = Ad.objects.filter(user=profile)
 
-    return render(request, 'main/user_list.html', {'users': users, 'profile': profile, 'ads': ads})
+    # Pass the users_with_messages queryset to the template context
+    return render(request, 'main/user_list.html', {
+        'users': users,
+        'profile': profile,
+        'ads': ads,
+        'users_with_messages': users_with_messages,
+    })
 
 
 def seller_profile(request, user_id):
@@ -157,17 +170,8 @@ def details(request):
     if ad_id:
         ad = Ad.objects.get(id=ad_id)  # Получаем объявление по id
 
-    return render(request, 'main/details.html', {'ad': ad, 'ads': ads})
+    return render(request, 'main/details.html', {'ad': ad, 'ads': ads, 'ad_id': ad_id})
 
-
-# def details(request):
-#     ads = Ad.objects.all()
-#     ad_id = request.GET.get('ad_id')  # Получаем id объявления из параметра GET-запроса
-#     ad = None
-#     if ad_id:
-#         ad = Ad.objects.filter(id=ad_id).first()  # Получаем объявление по id
-#
-#     return render(request, 'main/details.html', {'ad': ad, 'ads': ads})
 
 
 def register_view(request):
@@ -310,6 +314,7 @@ def edit_profile(request):
     return render(request, 'main/edit_profile.html', {'form': form, 'profile': profile})
 
 
+
 @login_required
 def profiles(request):
     return render(request, 'main/profiles.html')
@@ -334,7 +339,7 @@ def celery(request):
 def edit_ad(request, ad_id):
     ad = Ad.objects.get(id=ad_id)
     if request.method == 'POST':
-        form = AdForm(request.POST, instance=ad)
+        form = AdForm(request.POST, request.FILES, instance=ad)  # Учтите request.FILES
         if form.is_valid():
             form.save()
             return redirect('myads')

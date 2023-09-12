@@ -42,7 +42,7 @@
                 <div class="modal-content">
                     <!-- Здесь разместите содержимое вашего модального окна -->
                     <ul>
-                        <li><a href="#">Мои чаты</a></li>
+                        <li><a href="{% url 'user_list' user_id=1 %}">Мои чаты</a></li>
                         <li><a href="{% url 'myads' %}">Мои объявления</a></li>
                         <li><a href="{% url 'profile' %}">Профиль</a></li>
                         <li><a href="{% url 'support' %}">Поддержка</a></li>
@@ -121,11 +121,14 @@
 {% endblock %}
 </div>
 
-<footer>
-    <div class="footer-content">
-        <p>Это футер с каким-либо текстом</p>
-    </div>
+
+<footer class="footer" id="footer">
+  <div class="footer-content">
+    <!-- Footer content here -->
+    прием
+  </div>
 </footer>
+
 <script src="/static/main/js/profile.js"></script>
 </body>
 

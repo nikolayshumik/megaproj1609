@@ -117,7 +117,11 @@
   margin-bottom: 10px;
    border-top: 1px solid #c5d3e0;
 }
-
+.form-group photo{
+border-top: none;
+margin-top: 10px;
+margin-left: 10px;
+}
 .form-group-phot{
   margin-bottom: 10px;
 }
@@ -146,13 +150,13 @@ body {
 }
 
 /* Стили для футера */
-footer {
+/*footer {
 
     margin-top: 200px;
     width: 100%;
     background-color: white;
     /*border-bottom: 1px solid #c5d3e0;*/
-    border-top: 1px solid #c5d3e0;
+    /*border-top: 1px solid #c5d3e0;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -161,6 +165,16 @@ footer {
 
 .footer-content {
     padding: 20px; /* Добавление внутреннего отступа для контента футера */
+/*}*/
+.footer {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f1f1f1;
+  padding: 20px;
+  text-align: center;
 }
  .header {
             position: fixed;
@@ -306,7 +320,7 @@ p {
   .detailscont {
  width: 30%;
   margin-left: 25%;
-  border: 1px solid #c5d3e0;
+  border: 1px solid #4c6887;
   border-radius: 8px;
 
 }
@@ -330,10 +344,10 @@ margin-left: 70px;
   right: 5%;
   background-color: white;
   width: 250px;
-  height: 170px;
+  height: 180px;
   margin-right: 26%;
   float: left;
-  border: 1px solid #c5d3e0;
+  border: 1px solid #4c6887;
   border-radius: 8px;
 }
 
@@ -377,8 +391,11 @@ margin-left: 70px;
  .detailsads {
         display: flex;
         justify-content: flex-start;
-        width: 50%;
-        margin: 50px 0 100px 100px;
+        width: 45%;
+        margin-left: 10%;
+        margin-top: 50px;
+        border-radius: 5px;
+        border-left: 1px solid #c5d3e0;
     }
 
 .ad-containerdetail {
@@ -493,7 +510,17 @@ border-bottom: 1px solid #c5d3e0;
   border: 1px solid #4c6887;
   border-radius: 8px;
 }
-
+.divtext{
+width: 500px;
+height: 150px;
+ margin-left: 32%;
+ margin-top: 3%;
+ border-top: 1px solid #4c6887;
+ border-bottom: 1px solid #4c6887;
+}
+#dtext{
+margin-top: 20px;
+}
 .profile-left {
   width: 150px;
   margin-left: 2px;
@@ -753,11 +780,66 @@ ul li a:hover {
         margin-top: 8px;
     }
 
-
- /* Подача обьявлений */
-.form-controlph{
-        border-radius: 5px;
+.form-select{
+border-radius: 5px;
         border: 1px solid #4c6887;
-        background-color: white;
+        margin-top: 8px;
 }
 
+#id_location{
+border-radius: 5px;
+        border: 1px solid #4c6887;
+        margin-top: 8px;
+}
+
+
+
+.butsdetail {
+  display: flex;
+  justify-content: center;
+  padding: 10px; /* Отступы сверху и снизу */
+}
+
+.butsdetail form {
+  margin: 0 5px; /* Отступы слева и справа между формами */
+}
+
+.butsdetail button {
+  text-align: center;
+  width: 120px; /* Ширина кнопки */
+  padding: 10px; /* Отступы внутри кнопки */
+}
+
+.buttonMod.writesel{
+    margin-bottom: 5px;
+    margin-left: 10px;
+    width: 170px;
+    height: 27px;
+    text-align: center;
+}
+.buttonMod.reddel{
+margin-right: 20px;
+}
+
+.buttonMod.buyb{
+margin-right: 3px;
+}
+
+.buttonMod.look{
+margin-right: 3px;
+}
+
+.button-container-chat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.divchat {
+  margin: 10px;
+}
+.buttonMod.chatuser{
+width: 500px;
+text-align: center;
+}

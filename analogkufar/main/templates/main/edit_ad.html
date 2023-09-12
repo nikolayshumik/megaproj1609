@@ -1,11 +1,47 @@
 {% extends "main/index.html" %}
 
 {% block content %}
+<style>
+  .form-controlph {
+    background-color: #789cc3; /* задаем желтый фон кнопке */
+    color: white; /* меняем цвет текста на белый */
+    padding: 10px 20px; /* настраиваем внутренние отступы кнопки */
+    border: none; /* удаляем границу кнопки */
+    cursor: pointer; /* меняем курсор при наведении на кнопку */
+    margin-top: 10px;
+  }
+
+  .form-controlph:hover {
+    background-color: #4c6887; /* задаем темно-золотой цвет фона при наведении */
+  }
+  .form-controlph::file-selector-button {
+    display: none; /* скрываем встроенную кнопку */
+  }
+  .form-control {
+    width: 60%;
+    padding: 10px;
+}
+.buttonMod.save{
+margin-left: 39%;
+margin-top: 1%;
+margin-bottom: 1%;
+
+}
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+    display: none;
+}
+
+</style>
+
 <div class="form-wrapper">
 <form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   {{ form.as_p }}
-  <button class="buttonMod">Сохранить</button>
+  <button class="buttonMod save">Сохранить</button>
 </form>
   </div>
+
 {% endblock %}

@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<a href="{% url 'compose_message' user_id=profile.id %}">{{ profile.username }}</a></li>
+{% extends "main/index.html" %}
+{% load static %}
 
 
-<h1>Профиль пользователя: {{ profile.username }}</h1>
 
-{% if ads %}
-  <h2>Объявления, созданные пользователем:</h2>
-  <ul>
-    {% for ad in ads %}
-      <li>{{ ad.title }} - {{ ad.user.username }}</li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <h2>У пользователя нет объявлений</h2>
-{% endif %}
-</html>
+
+{% block content %}
+
+<div class="button-container-chat">
+  {% for user in users %}
+    <div class="divchat">
+        {% if user in users_with_messages %}
+            <a class="buttonMod chatuser" href="{% url 'compose_message' user_id=user.id %}" class="open-dialog">Чат с {{ user.username }}</a>
+        {% endif %}
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
