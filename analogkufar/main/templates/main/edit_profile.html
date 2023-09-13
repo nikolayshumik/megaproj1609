@@ -7,9 +7,27 @@
 
 {% block content %}
 <style>
-  #file-upload-button {
-    background-color: yellow;
-    /* Add any additional styling here */
+.form-controlph {
+    background-color: #789cc3; /* задаем желтый фон кнопке */
+    color: white; /* меняем цвет текста на белый */
+    padding: 10px 20px; /* настраиваем внутренние отступы кнопки */
+    border: none; /* удаляем границу кнопки */
+    cursor: pointer; /* меняем курсор при наведении на кнопку */
+    margin-top: 10px;
+  }
+
+  .form-controlph:hover {
+    background-color: #4c6887; /* задаем темно-золотой цвет фона при наведении */
+  }
+  .form-controlph::file-selector-button {
+    display: none; /* скрываем встроенную кнопку */
+  }
+  #id_photo{
+background-color: #789cc3;
+color: white;
+}
+ #id_photo::file-selector-button {
+    display: none; /* скрываем встроенную кнопку */
   }
 </style>
 <div class="profile-block">
