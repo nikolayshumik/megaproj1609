@@ -45,7 +45,7 @@
         {% endfor %}
 
         {% else %}
-        <p>У вас пока нет объявлений.</p>
+        <p>У вас пока нет объявлений <a href="{% url 'postads' %}" class="buttonMod">+ Подать объявление </a></p>
         {% endif %}
     </div>
 

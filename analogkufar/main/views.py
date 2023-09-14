@@ -320,8 +320,10 @@ def profiles(request):
     return render(request, 'main/profiles.html')
 
 
+@login_required
 def myads(request):
-    ads = Ad.objects.all()
+    user = request.user
+    ads = Ad.objects.filter(user=user)
     ad_id = request.GET.get('ad_id')
     equal_ad_id = int(ad_id) if ad_id else None
     return render(request, 'main/myads.html', {'ads': ads, 'equal_ad_id': equal_ad_id})

@@ -16,47 +16,46 @@
 <div style="text-align: center;">
     <p>Корзина покупок...</p>
 </div>
-{% for ad in ads %}
-<div class="basket-ad">
-    <div class="basket-content">
-        <div class="basket-image">
-            <img src="{{ ad.photo.url }}" alt="Ad Image">
-        </div>
-        <div class="basket-description">
-            <h3>{{ ad.title }}</h3>
-            <p><strong>Price:</strong> {{ ad.price }}</p>
-            <div class="buttons-container">
-                <!--          <form action="{% url 'basket' %}" method="post">-->
-                <!--            {% csrf_token %}-->
-                <input type="hidden" name="ad_id" value="{{ ad.id }}">
-                <form method="get" action="{% url 'buy' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="ad_id" value="{{ ad.id }}">  <!-- передаем ID объявления в форме -->
-                    <button class="buttonMod buyb">Купить</button>
-                </form>
-                <!--          </form>-->
-                <form action="{% url 'details' %}" method="get" class="details-form">
-                    {% csrf_token %}
+{% if ads %}
+    {% for ad in ads %}
+    <div class="basket-ad">
+        <div class="basket-content">
+            <div class="basket-image">
+                <img src="{{ ad.photo.url }}" alt="Ad Image">
+            </div>
+            <div class="basket-description">
+                <h3>{{ ad.title }}</h3>
+                <p><strong>Price:</strong> {{ ad.price }}</p>
+                <div class="buttons-container">
                     <input type="hidden" name="ad_id" value="{{ ad.id }}">
-                    <button class="buttonMod look">Посмотреть детали</button>
-                </form>
-                <form action="{% url 'delete_from_basket' %}" method="post" class="delete-form"
-                      data-ad-id="{{ ad.id }}">
-                    {% csrf_token %}
-                    <input type="hidden" name="ad_id" value="{{ ad.id }}">
-                    <button class="buttonMod delbas">Удалить из корзины</button>
-                </form>
+                    <form method="get" action="{% url 'buy' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="ad_id" value="{{ ad.id }}">
+                        <button class="buttonMod buyb">Купить</button>
+                    </form>
+                    <form action="{% url 'details' %}" method="get" class="details-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="ad_id" value="{{ ad.id }}">
+                        <button class="buttonMod look">Посмотреть детали</button>
+                    </form>
+                    <form action="{% url 'delete_from_basket' %}" method="post" class="delete-form" data-ad-id="{{ ad.id }}">
+                        {% csrf_token %}
+                        <input type="hidden" name="ad_id" value="{{ ad.id }}">
+                        <button class="buttonMod delbas">Удалить из корзины</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-
+    {% endfor %}
+    <div class="basket-info">
+        <p>всего товаров ({{ total_quantity }})</p>
+        <p>общая стоимость {{ total_price }}</p>
+    </div>
+{% else %}
+    <div class="uvasnettov">
+    <p style="text-align: center;">У вас пока нет товаров <a href="{% url 'home' %}" class="buttonMod nobuy">ЗА ПОКУПКАМИ</a></p>
 </div>
-{% endfor %}
-
-<div class="basket-info">
-    <p>всего товаров ({{ total_quantity }})</p>
-    <p>общая стоимость {{ total_price }}</p>
-</div>
-
+{% endif %}
 
 {% endblock %}

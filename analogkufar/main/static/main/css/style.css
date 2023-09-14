@@ -882,3 +882,19 @@ text-align: center;
 height: 20px;
 margin-left: 6%;
 }
+
+.uvasnettov{
+justify-content: center;
+  align-items: center;
+background-color: white;
+  border-radius: 8px;
+  border: 1px solid #4c6887;
+   width: 400px;
+   margin-left: 38%;
+}
+
+.buttonMod.nobuy{
+ width: 160px;
+ margin-left: 8px;
+ margin-top: 4px;
+}
