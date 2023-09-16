@@ -74,10 +74,10 @@
 
 </style>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="form-container">
     <h2>Служба поддержки</h2>
-    <form method="post" class="formsupport">
+    <form id="support-form" method="post" class="formsupport">
         {% csrf_token %}
         <div class="form-group">
             <label class="label1" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
@@ -94,4 +94,7 @@
         <button type="submit" class="buttonMod">Отправить</button>
     </form>
 </div>
+
+
+
 {% endblock %}

@@ -86,6 +86,8 @@ margin-bottom: 10px;
     <div class="form-container">
         <form method="post" action="{% url 'submit_order' %}">
             {% csrf_token %}
+            <input type="hidden" name="ad_id" value="{{ ad.id }}">
+  <input type="hidden" name="price" value="{{ ad.price }}">
             <label for="city">Город:</label>
             <select name="city" id="city">
                 <option value="1">Город 1</option>

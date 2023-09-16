@@ -39,7 +39,8 @@ from django.db.models import Q
 
 def compose_message(request, user_id):
     recipient = get_object_or_404(User, id=user_id)
-    recipient_profile = Profile.objects.get(user=recipient)  # Получите профиль получателя сообщения
+    recipient_profile = Profile.objects.get(user=recipient)
+
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -48,17 +49,17 @@ def compose_message(request, user_id):
             message.recipient = recipient
             message.save()
             form = MessageForm()
-            # Redirect after successfully sending message
             return redirect('compose_message', user_id=user_id)
     else:
         form = MessageForm()
 
+    # Filter messages based on sender and recipient
     messages = Message.objects.filter(
-        sender__in=[request.user, recipient],
-        recipient__in=[request.user, recipient]
+        Q(sender=request.user, recipient=recipient) | Q(sender=recipient, recipient=request.user)
     ).order_by('created_at')
 
-    return render(request, 'main/compose.html', {'form': form, 'messages': messages, 'recipient': recipient, 'recipient_profile': recipient_profile})
+    return render(request, 'main/compose.html',
+                  {'form': form, 'messages': messages, 'recipient': recipient, 'recipient_profile': recipient_profile})
 
 
 @login_required
@@ -362,12 +363,13 @@ def delete_ad(request, ad_id):
 
 def buy(request):
     ads = Ad.objects.all()
-    ad_id = request.GET.get('ad_id')  # Получаем id объявления из параметра GET-запроса
+    ad_id = request.GET.get('ad_id')
     ad = None
+    price = None
     if ad_id:
-        ad = Ad.objects.get(id=ad_id)  # Получаем объявление по id
-
-    return render(request, 'main/buy.html', {'ad': ad, 'ads': ads})
+        ad = Ad.objects.get(id=ad_id)
+        price = ad.price
+    return render(request, 'main/buy.html', {'ad': ad, 'ads': ads, 'price': price})
 
 
 def send_email(request):
@@ -379,15 +381,25 @@ def send_email(request):
 
 
 def submit_order(request):
+    ads = Ad.objects.all()
+    ad_id = request.POST.get('ad_id')
+    price = request.POST.get('price')
+    ad = None
+    if ad_id:
+        try:
+            ad = Ad.objects.get(id=ad_id)
+        except Ad.DoesNotExist:
+            ad = None
+
     if request.method == 'POST':
-        # Обработка данных заказа
+        # Handling order data
         city = request.POST['city']
         postal_code = request.POST['postal_code']
         full_name = request.POST['full_name']
         tel = request.POST['tel']
         payment_method = request.POST['payment_method']
 
-        # Создание нового объекта Purchase и сохранение его в базу данных
+        # Create a new Purchase object and save it to the database
         purchase = Purchase(
             city=city,
             postal_code=postal_code,
@@ -401,17 +413,20 @@ def submit_order(request):
             send_email(request)
             return redirect('order_confirmation')
         elif payment_method == 'online_payment':
-            return HttpResponseRedirect(reverse('online_payment'))
+            if ad_id is not None and price is not None:
+                return redirect('online_payment', ad_id=ad_id, price=price)
+            else:
+                # Handle the case when ad_id and price are not set
+                pass
 
-        return redirect('order_confirmation')
+    return render(request, 'main/buy.html', {'ad': ad, 'ads': ads, 'price': price})
 
-    return render(request, 'main/buy.html')
+def online_payment(request, ad_id, price):
+    ads = Ad.objects.all()
+    ad = Ad.objects.get(id=ad_id)
+    price = float(price)
 
-
-def online_payment(request):
-    # Логика онлайн-оплаты и рендеринг шаблона
-    return render(request, 'main/online_payment.html')
-
+    return render(request, 'main/online_payment.html', {'ad': ad, 'ads': ads, 'price': price})
 
 def support(request):
     if request.method == 'POST':

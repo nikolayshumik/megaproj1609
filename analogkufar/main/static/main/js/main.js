@@ -54,3 +54,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+
+//работа с окном покупки
+document.getElementById("buyButton").addEventListener("click", function(event) {
+  event.preventDefault(); // Предотвратить действие по умолчанию
+  document.getElementById("buyModal").style.display = "block"; // Открыть окно
+});
+//кнопка закрыть в окне
+document.getElementById("closeButton").addEventListener("click", function() {
+  document.getElementById("buyModal").style.display = "none"; // Закрыть окно
+});
+
+
+$(document).ready(function() {
+    $('.formsupport').submit(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: '',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                $('.form-container').html(response);  // Заменяем содержимое контейнера на сообщение об успехе
+            },
+            error: function(xhr, status, error) {
+                // Обработка ошибки
+            }
+        });
+    });
+});

@@ -10,9 +10,7 @@
   <style>
         /* CSS-код для установки изображения в качестве фона */
          body {
-             background-image: url("{% static 'assets/637445.jpg' %}");
-             background-repeat: no-repeat;
-             background-size: 100% 100%;
+    background-color: #f1fbff;
         }
     </style>
 <body>
@@ -21,6 +19,9 @@
     <!--        <img src="assets/logo3.jpg" alt="">-->
     <!--    </div>-->
     <div class="navigation">
+            <div class="logo">
+        <img src="{% static 'assets/logo2.jpg' %}" alt="">
+    </div>
         <div class="search-container">
             <form method="get">
                 {{ title_search_form.as_p }}
@@ -28,6 +29,7 @@
             </form>
         </div>
         {% if user.is_authenticated %}
+
         <div class="buttons">
             <a href="{% url 'postads' %}" class="buttonMod">+ Подать объявление </a>
 
@@ -63,9 +65,11 @@
 
         </div>
         {% else %}
-        <a href="{% url 'postads' %}" class="buttonMod">Подать объявление</a>
-        <a href="{% url 'basket' %}" class="buttonMod">Корзина</a>
+        <a href="{% url 'postads' %}" class="buttonMod">+ Подать объявление</a>
         <a href="{% url 'home' %}" class="buttonMod">Главная</a>
+          <a href="{% url 'basket' %}" class="buttonModbasket">
+                    <img src="{% static 'assets/basket.png' %}" alt="Корзина">
+                </a>
         <a href="{% url 'register' %}" class="buttonMod">Войти</a>
 
 
