@@ -13,6 +13,20 @@
     background-color: #f1fbff;
         }
 
+.profile-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 </style>
 <body>
 <div class="header">
@@ -43,9 +57,25 @@
             </div>
             <div class="buttonModbaskett">
 
+                {% if current_user.is_authenticated %}
+                <!-- Отобразить фотографию профиля, если пользователь аутентифицирован и имеет фотографию -->
+                {% if current_user.profile.photo %}
+                <a href="#" id="openModal" class="buttonModbasket">
+                    <div class="profile-photo">
+                        <img class="userphoto" src="{{ current_user.profile.photo.url }}" alt="Профиль">
+                    </div>
+                </a>
+                {% else %}
                 <a href="#" id="openModal" class="buttonModbasket">
                     <img src="{% static 'assets/pr2.png' %}" alt="Профиль">
                 </a>
+                {% endif %}
+                {% else %}
+                <!-- Отобразить изображение pr2.png для неаутентифицированного пользователя -->
+                <a href="#" id="openModal" class="buttonModbasket">
+                    <img src="{% static 'assets/pr2.png' %}" alt="Профиль">
+                </a>
+                {% endif %}
 
             </div>
 
