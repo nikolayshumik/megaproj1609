@@ -16,7 +16,10 @@
         border-radius: 8px;
         z-index: 10;
     }
-
+.buttonMod.uyb{
+width: 100px;
+height: 50px;
+}
 </style>
 
 
@@ -67,7 +70,11 @@
                     <input type="hidden" name="ad_id" value="{{ ad.id }}">
                     <button class="buttonMod">Посмотреть детали</button>
                 </form>
-                <button class="buttonMod">Купить</button>
+                 <form method="get" action="{% url 'buy' %}">
+                {% csrf_token %}
+                <input type="hidden" name="ad_id" value="{{ ad.id }}">  <!-- передаем ID объявления в форме -->
+                <button class="buttonMod uyb">Купить</button>
+            </form>
             </div>
         </div>
         <img class="ad-imageseller" src="{{ ad.photo.url }}" alt="Ad Image"

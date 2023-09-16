@@ -81,6 +81,13 @@ h3{
 margin-left: 25%;
 margin-bottom: 10px;
 }
+   .detailphotobuyy {
+   width: 90px;
+   height: 70px;
+   border-radius: 8px;
+
+   margin-top: 5px;
+}
 </style>
 <div class="sqform">
     <div class="form-container">
@@ -90,12 +97,12 @@ margin-bottom: 10px;
   <input type="hidden" name="price" value="{{ ad.price }}">
             <label for="city">Город:</label>
             <select name="city" id="city">
-                <option value="1">Город 1</option>
-                <option value="2">Город 2</option>
-                <option value="3">Город 3</option>
-                <option value="4">Город 4</option>
-                <option value="5">Город 5</option>
-                <option value="6">Город 6</option>
+                <option value="1">Минск</option>
+                <option value="2">Гродно</option>
+                <option value="3">Витебск</option>
+                <option value="4">Гомель</option>
+                <option value="5">Брест</option>
+                <option value="6">Могилев</option>
             </select>
 
             <label for="postal_code">Почтовый индекс:</label>
@@ -117,14 +124,14 @@ margin-bottom: 10px;
         </form>
 
     </div>
-    <div class="square-div">
+    <div class="square-div" style="width: 200px; height: 200px; text-align: center; overflow: hidden;">
 
-            <img src="{{ ad.photo.url }}" alt="Ad Photo" class="detailphotobuy">
+    <img src="{{ ad.photo.url }}" alt="Ad Photo" class="detailphotobuyy">
 
-        <h3>{{ ad.title }}</h3>
-        <h3>{{ ad.price }}</h3>
+    <h3 style="margin: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ ad.title }}</h3>
+    <h3 style="margin: 5px;">{{ ad.price }}</h3>
 
-    </div>
+</div>
 </div>
 
 

@@ -30,7 +30,16 @@
   color: black;
   cursor: pointer;
 }
-
+.divnetad {
+  background-color: white;
+  width: 350px;
+  margin: 0 auto;
+  margin-left: 33%;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #789cc3;
+}
 </style>
 <div class="myadsword"><h1>Мои объявления</h1></div>
 
@@ -45,7 +54,9 @@
         {% endfor %}
 
         {% else %}
+        <div class="divnetad">
         <p>У вас пока нет объявлений <a href="{% url 'postads' %}" class="buttonMod">+ Подать объявление </a></p>
+            </div>
         {% endif %}
     </div>
 

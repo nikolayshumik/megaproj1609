@@ -29,17 +29,18 @@ from django.shortcuts import render, redirect
 from .models import Message
 from .forms import MessageForm
 from django.core.mail import send_mail
-
+from django.contrib import messages as django_messages
 from .forms import MessageFormEmail
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
-
-
+from django.db.models.functions import Upper
+from django.db.models.functions import Lower
 
 def compose_message(request, user_id):
     recipient = get_object_or_404(User, id=user_id)
     recipient_profile = Profile.objects.get(user=recipient)
+    messages = []
 
     if request.method == 'POST':
         form = MessageForm(request.POST)
@@ -47,13 +48,18 @@ def compose_message(request, user_id):
             message = form.save(commit=False)
             message.sender = request.user
             message.recipient = recipient
+
+            # Check if sender and recipient are the same
+            if message.sender == message.recipient:
+                django_messages.error(request, "You cannot send a message to yourself.")
+                return redirect('compose_message', user_id=user_id)
+
             message.save()
             form = MessageForm()
             return redirect('compose_message', user_id=user_id)
     else:
         form = MessageForm()
 
-    # Filter messages based on sender and recipient
     messages = Message.objects.filter(
         Q(sender=request.user, recipient=recipient) | Q(sender=recipient, recipient=request.user)
     ).order_by('created_at')
@@ -190,18 +196,15 @@ def register_view(request):
 def index(request):
     ads = Ad.objects.all()
     title_search_form = TitleSearchForm(request.GET)
-    filter_form = AdFilterForm(request.GET)  # Создайте экземпляр формы, используйте переданные GET-параметры для фильтрации (если есть)
+    filter_form = AdFilterForm(request.GET)
     if filter_form.is_valid():
         title = filter_form.cleaned_data.get('title')
-        # category = filter_form.cleaned_data.get('category')
         location = filter_form.cleaned_data.get('location')
         price_min = filter_form.cleaned_data.get('price_min')
         price_max = filter_form.cleaned_data.get('price_max')
 
         if title:
             ads = ads.filter(title__icontains=title)
-        # if category:
-        #     ads = ads.filter(category=category)
         if location:
             ads = ads.filter(location=location)
         if price_min is not None and price_max is not None:
@@ -214,6 +217,11 @@ def index(request):
     if title_search_form.is_valid():
         simple_title = title_search_form.cleaned_data.get('simple_title')
         if simple_title:
+            ads = ads.filter(title__icontains=simple_title)
+
+    else:
+        if request.GET.get('simple_title'):
+            simple_title = request.GET.get('simple_title')
             ads = ads.filter(title__icontains=simple_title)
 
     # Добавьте вызов метода order_by() для сортировки объявлений по возрастанию цены
