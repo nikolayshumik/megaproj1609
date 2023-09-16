@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main',
     'django_celery_results',
 
+
 ]
 
 MIDDLEWARE = [

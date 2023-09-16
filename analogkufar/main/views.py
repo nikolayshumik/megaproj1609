@@ -239,9 +239,13 @@ def basket(request):
 
         ad = Ad.objects.get(id=ad_id)
 
-        basket_item, created = BasketItem.objects.update_or_create(basket=user_basket, ad=ad, defaults={'quantity': 0})
-        basket_item.quantity += quantity
-        basket_item.save()
+        # Check if the owner is trying to add their own ad to the basket
+        if ad.user == request.user:
+            messages.warning(request, "You cannot add your own ad to the basket.")
+        else:
+            basket_item, created = BasketItem.objects.update_or_create(basket=user_basket, ad=ad, defaults={'quantity': 0})
+            basket_item.quantity += quantity
+            basket_item.save()
 
         return redirect(request.META.get('HTTP_REFERER'))  # Return to the previous page where the button was clicked
 

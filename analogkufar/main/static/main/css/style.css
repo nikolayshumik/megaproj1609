@@ -552,10 +552,19 @@ margin-left: 20px;
     margin-right: 20px;
 }
 
-.profilephoto {
-  width: 100%;
+ .profilephotodef{
+    width: 60px;
+    height: 60px;
+    margin-left: 27px;
+    }
+    .profilephoto{
+    width: 100px;
+  height: 100px;
+  overflow: hidden;
+  margin-left: 10px;
+  margin-top: 5px;
   border-radius: 8px;
-}
+  }
 
 .profile-right {
   margin-left: 20px;

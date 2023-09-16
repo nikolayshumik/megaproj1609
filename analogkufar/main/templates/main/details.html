@@ -60,7 +60,7 @@
 <div class="detailsads">
     <div class="ad-containerdetail">
         {% for other in ads %}
-        {% if other.category == ad.category %}
+        {% if other != ad and other.category == ad.category %}
         <div class="ad-item">
             <form action="{% url 'basket' %}" method="post">
                 {% csrf_token %}

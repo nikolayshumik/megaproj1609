@@ -27,8 +27,11 @@
   object-fit: cover;
 }
 
+
+
 </style>
 <body>
+
 <div class="header">
     <!--    <div class="image-container">-->
     <!--        <img src="assets/logo3.jpg" alt="">-->
@@ -149,7 +152,10 @@
             <form action="{% url 'basket' %}" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="ad_id" value="{{ ad.id }}">
-                <img class="ad-image" src="{{ ad.photo.url }}" alt="Ad Image">
+                <div class="mainphoto" style="width: 220px; height: 200px; border-radius: 8px; background-color: white; border-bottom: 1px solid black;">
+                    <img class="ad-image" src="{{ ad.photo.url }}" alt="Ad Image"
+                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
                 <div class="ad-description">
                     <p><strong>Price:</strong> {{ ad.price }}</p>
                     <h3>{{ ad.title }}</h3>

@@ -29,13 +29,29 @@ color: white;
  #id_photo::file-selector-button {
     display: none; /* скрываем встроенную кнопку */
   }
+  .profilephotodef{
+    width: 70px;
+    height: 70px;
+    margin-left: 27px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    }
+   .profilephoto{
+    width: 100px;
+  height: 100px;
+  overflow: hidden;
+  margin-left: 10px;
+  margin-top: 5px;
+  }
 </style>
 <div class="profile-block">
-    <div class="profile-left">
-        {% if profile.photo %}
-        <img src="{{ profile.photo.url }}" alt="Profile Photo" class="profilephoto">
-        {% endif %}
-    </div>
+     <div class="profile-left">
+    {% if profile.photo %}
+      <img src="{{ profile.photo.url }}" alt="Profile Photo" class="profilephoto">
+    {% else %}
+      <img src="{% static 'assets/pr2.png' %}" alt="Profile Photo" class="profilephotodef">
+    {% endif %}
+  </div>
     <div class="profile-right">
         <h1>{{ profile.user.username }}</h1>
         <p>{{ profile.bio }}</p>
