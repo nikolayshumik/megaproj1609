@@ -243,7 +243,8 @@ def basket(request):
         basket_item.quantity += quantity
         basket_item.save()
 
-        return redirect('home')
+        return redirect(request.META.get('HTTP_REFERER'))  # Return to the previous page where the button was clicked
+
     else:
         basket_items = BasketItem.objects.filter(basket=user_basket)
         ads = Ad.objects.filter(basketitem__in=basket_items)

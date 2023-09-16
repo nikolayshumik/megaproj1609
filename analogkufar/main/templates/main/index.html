@@ -7,21 +7,22 @@
     <link rel="stylesheet" href="/static/main/css/style.css">
 
 </head>
-  <style>
+<style>
         /* CSS-код для установки изображения в качестве фона */
          body {
     background-color: #f1fbff;
         }
-    </style>
+
+</style>
 <body>
 <div class="header">
     <!--    <div class="image-container">-->
     <!--        <img src="assets/logo3.jpg" alt="">-->
     <!--    </div>-->
     <div class="navigation">
-            <div class="logo">
-        <img src="{% static 'assets/logo2.jpg' %}" alt="">
-    </div>
+        <div class="logo">
+            <img src="{% static 'assets/logo2.jpg' %}" alt="">
+        </div>
         <div class="search-container">
             <form method="get">
                 {{ title_search_form.as_p }}
@@ -40,10 +41,12 @@
                 </a>
 
             </div>
-               <div class="buttonModbaskett">
+            <div class="buttonModbaskett">
+
                 <a href="#" id="openModal" class="buttonModbasket">
                     <img src="{% static 'assets/pr2.png' %}" alt="Профиль">
                 </a>
+
             </div>
 
 
@@ -67,9 +70,9 @@
         {% else %}
         <a href="{% url 'postads' %}" class="buttonMod">+ Подать объявление</a>
         <a href="{% url 'home' %}" class="buttonMod">Главная</a>
-          <a href="{% url 'basket' %}" class="buttonModbasket">
-                    <img src="{% static 'assets/basket.png' %}" alt="Корзина">
-                </a>
+        <a href="{% url 'basket' %}" class="buttonModbasket">
+            <img src="{% static 'assets/basket.png' %}" alt="Корзина">
+        </a>
         <a href="{% url 'register' %}" class="buttonMod">Войти</a>
 
 
@@ -135,10 +138,10 @@
 
 
 <footer class="footer" id="footer">
-  <div class="footer-content">
-    <!-- Footer content here -->
-    прием
-  </div>
+    <div class="footer-content">
+        <!-- Footer content here -->
+        прием
+    </div>
 </footer>
 
 <script src="/static/main/js/profile.js"></script>

@@ -5,6 +5,16 @@
 {% block title %}О нас{% endblock %}
 
 {% block content %}
+<style>
+    .buttonMod.bask{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    }
+
+</style>
+
+
+
 
 <div class="detailscont">
     {% if ad %}
@@ -65,9 +75,13 @@
             <form action="{% url 'details' %}" method="get" class="details-form">
                 {% csrf_token %}
                 <input type="hidden" name="ad_id" value="{{ other.id }}">
-                <button class="buttonMod">Посмотреть детали</button>
+                <button class="buttonMod bask">Посмотреть детали</button>
             </form>
-            <button class="buttonMod">Купить</button>
+            <form method="get" action="{% url 'buy' %}">
+                {% csrf_token %}
+                <input type="hidden" name="ad_id" value="{{ ad.id }}">  <!-- передаем ID объявления в форме -->
+                <button class="buttonMod">Купить</button>
+            </form>
         </div>
     </div>
     {% endif %}

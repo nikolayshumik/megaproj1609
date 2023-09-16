@@ -22,6 +22,7 @@
     messageContainer.scrollTop = messageContainer.scrollHeight;
   }
 
+  window.onload = scrollToBottom; // Call function when the page finishes loading
 </script>
 <!--  document.addEventListener('DOMContentLoaded', scrollToBottom);-->
 <!--    function refreshPage() {-->
@@ -41,6 +42,7 @@
     <div class="profile-right">
         <h1>{{ recipient_profile.user.username }}</h1>
         <p>{{ recipient_profile.bio }}</p>
+
     </div>
 </div>
 
