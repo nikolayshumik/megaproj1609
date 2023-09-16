@@ -309,7 +309,7 @@ def edit_profile(request):
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('profile')
     else:
         form = ProfileForm(instance=profile)
 

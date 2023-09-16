@@ -24,9 +24,9 @@
             <img src="{% static 'assets/logo2.jpg' %}" alt="">
         </div>
         <div class="search-container">
-            <form method="get">
+            <form method="get" action="{% url 'home' %}">
                 {{ title_search_form.as_p }}
-                <!--                <button class="search-button">Найти</button>-->
+
             </form>
         </div>
         {% if user.is_authenticated %}
